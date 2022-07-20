@@ -1,0 +1,47 @@
+
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "plugins": ["jest", "react"],
+  "extends": ["plugin:@fui/typescript", "plugin:@fui/prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "legacyDecorators": true,
+      "jsx": true
+    }
+  },
+  "rules": {
+    // 由于prettier和eslint一起使用需要关闭一些规则，但是prettier没有以下规则的配置，统一写在这里
+    // 对象字面量简写语法
+    "object-shorthand": ["error", "always"],
+    // 函数体在必要的时候使用大括号
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      {
+        "requireReturnForObjectLiteral": true
+      }
+    ],
+    // 回调使用用箭头函数
+    "prefer-arrow-callback": "error",
+    // 如果 if 块中包含了一个 return 语句，else 块就成了多余的了。可以将其内容移至块外
+    "no-else-return": "error",
+    "no-use-before-define": "off",
+
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off"
+      }
+    }
+  ]
+}

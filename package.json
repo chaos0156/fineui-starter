@@ -1,0 +1,77 @@
+{
+  "name": "fineui-starter",
+  "version": "1.0.0",
+  "description": "fineui starter",
+  "scripts": {
+    "start": "webpack-dev-server -p --progress --host 127.0.0.1 --config=webpack/webpack.dev.js --mode development",
+    "build": "webpack -p --progress --config=webpack/webpack.prod.js --mode production",
+    "test": "jest",
+    "eslint": "eslint \"./**/*.{js,ts,jsx,tsx}\"",
+    "eslint:fix": "eslint \"./**/*.{js,ts,tsx}\" --fix",
+    "stylelint": "stylelint \"./**/*.less\" --syntax less",
+    "stylelint:fix": "stylelint \"./**/*.less\" --syntax less --fix",
+    "prettier": "prettier --write \"./**/*.{js,ts,jsx,tsx,less}\""
+  },
+  "dependencies": {
+    "@fui/core": "^2.0.0"
+  },
+  "devDependencies": {
+    "@fui/babel-preset-fineui": "^1.0.0",
+    "@fui/eslint-plugin": "^1.0.7",
+    "@fui/typescript-configs": "^1.0.1",
+    "@types/jest": "^24.0.11",
+    "autoprefixer": "9.6.1",
+    "babel-loader": "8.0.6",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "cross-env": "6.0.0",
+    "css-loader": "3.0.0",
+    "eslint": "^7.30.0",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-react": "^7.24.0",
+    "fork-ts-checker-webpack-plugin": "1.4.3",
+    "html-webpack-plugin": "3.2.0",
+    "husky": "^7.0.1",
+    "jest": "24.7.1",
+    "jest-css-modules-transform": "2.5.0",
+    "jest-environment-jsdom": "24.7.1",
+    "jest-snapshot": "23.6.0",
+    "less": "^3.11.3",
+    "less-loader": "5.0.0",
+    "lint-staged": "^11.0.1",
+    "mini-css-extract-plugin": "0.7.0",
+    "npm-run-all": "4.1.5",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
+    "postcss-loader": "3.0.0",
+    "postcss-simple-vars": "5.0.2",
+    "prettier": "^2.3.2",
+    "source-map-loader": "0.2.4",
+    "style-loader": "0.23.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-prettier": "^1.2.0",
+    "typescript": "3.9.2",
+    "uglifyjs-webpack-plugin": "2.2.0",
+    "webpack": "4.35.2",
+    "webpack-cli": "3.3.5",
+    "webpack-dev-server": "3.7.2",
+    "webpack-merge": "4.2.1"
+  },
+  "author": "",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.less": [
+      "stylelint --fix",
+      "git add"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "extends": "@fui/typescript-configs/application.json",
+    "include": ["src/*.ts", "src/*.tsx", "src/**/*.ts", "src/**/*.tsx", "test", "typings"],
+    "compilerOptions": {
+        /* 基本选项 */
+        "jsx": "react",
+        /* 严格的类型检查选项 */
+        "strict": false,
+        /* 模块解析选项 */
+        "baseUrl": "./",
+        "rootDir": ".",
+        "paths": {
+            "@/*": ["src/*"],
+            "@app/*": ["src/modules/app/*"],
+            "@base/*": ["src/modules/base/*"],
+            "@card/*": ["src/modules/card/*"],
+            "@core/*": ["src/modules/core/*"],
+            "@service/*": ["src/modules/service/*"],
+            "@types/*": ["src/modules/types/*"]
+        }
+    }
+}

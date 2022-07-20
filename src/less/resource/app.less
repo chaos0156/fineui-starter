@@ -1,0 +1,47 @@
+@import '../lib/constant.less';
+
+// 左边框式列表选项
+.app-list-item-border-left {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  color: @color-bi-text-gray;
+  &:hover,
+  &.hover {
+    color: @color-bi-text-white;
+  }
+  &.active,
+  &:active {
+    border-left: 4px solid white;
+    color: @color-bi-text-white;
+  }
+  &.disabled {
+    &,
+    &:hover,
+    &:active {
+      color: @color-bi-text-disabled !important;
+    }
+  }
+}
+
+// 下划线式列表选项
+.app-list-item-underline {
+  .box-sizing(border-box);
+  &:hover,
+  &.hover {
+    font-weight: bold;
+  }
+  &.active,
+  &:active {
+    border-bottom: 2px solid @color-app-primary;
+    font-weight: bold;
+    color: @color-app-primary;
+    background-color: @color-bi-background-default;
+  }
+  &.disabled {
+    &,
+    &:hover,
+    &:active {
+      color: @color-bi-text-disabled !important;
+    }
+  }
+}

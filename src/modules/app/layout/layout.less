@@ -1,0 +1,16 @@
+@import '~@/index.less';
+
+.app-layout {
+  .app-layout-header {
+    .z-index-layer(2);
+  }
+  .app-layout-body {
+    .z-index-layer(1);
+    .app-layout-sider {
+      .z-index-layer(2);
+    }
+    .app-layout-content {
+      .z-index-layer(1);
+    }
+  }
+}

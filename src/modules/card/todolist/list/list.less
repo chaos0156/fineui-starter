@@ -1,0 +1,30 @@
+@import '~@/index.less';
+
+.app-todolist-list {
+  .header {
+    .title {
+      font-size: @font-size-16;
+      font-weight: bold;
+    }
+    .count {
+      border-radius: 100%;
+      color: @font-color-white;
+      background-color: @color-bi-background-light-black;
+    }
+  }
+  .items {
+    .item {
+      .check {
+      }
+      .text {
+      }
+      .close {
+        &:hover,
+        &.hover {
+          font-weight: bold;
+          color: @color-bi-text-redmark;
+        }
+      }
+    }
+  }
+}
