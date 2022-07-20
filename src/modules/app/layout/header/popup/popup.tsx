@@ -13,7 +13,7 @@ export class HeaderPopup extends BI.Widget {
     };
 
     private docUrl = 'https://fanruan.design/doc.html?post=';
-
+    private githubUrl = 'https://github.com/chaos0156/fineui-starter'
     private arr = [
         {
             text: '首页',
@@ -26,7 +26,7 @@ export class HeaderPopup extends BI.Widget {
                 {
                     eventName: 'EVENT_CHANGE',
                     action: () => {
-                        location.href = this.docUrl;
+                        location.href = this.githubUrl;
                     },
                 },
             ],
@@ -49,7 +49,7 @@ export class HeaderPopup extends BI.Widget {
                 type: 'bi.button',
                 clear: true,
                 height: 40,
-                cls: 'popupbutton',
+                baseCls:'PopupItem'
             },
             item
         );
@@ -58,7 +58,7 @@ export class HeaderPopup extends BI.Widget {
     public render() {
         return (
             <BI.ButtonGroup height={this.arr.length * 40}>
-                <BI.VerticalLayout horizontalAlign="left">{this.arr}</BI.VerticalLayout>
+                <BI.VerticalLayout horizontalAlign="center">{this.arr}</BI.VerticalLayout>
             </BI.ButtonGroup>
         );
     }
