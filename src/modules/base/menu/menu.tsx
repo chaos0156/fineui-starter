@@ -100,7 +100,8 @@ export class Menu extends BI.Widget {
                 ref={ref => {
                     this.menuRef = ref;
                 }}
-                expander={<BI.Expander isDefaultInit={false} popup={<BI.CustomTree />} />}
+                // 可展开菜单栏
+                expander={<BI.Expander isDefaultInit={false} cls={'expander'} popup={<BI.CustomTree />} />}
                 el={<BI.ButtonTree layouts={[<BI.VerticalLayout vgap={vgap} />]} chooseType={BI.Selection.Single} />}
                 items={menuItems}
                 value={value}

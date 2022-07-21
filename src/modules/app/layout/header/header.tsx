@@ -1,6 +1,7 @@
 import { shortcut } from '@core/decorator';
 import LayoutConstant from '../layout.constant';
 import { HeaderPopup } from './popup/popup';
+import { HeaderDrawer } from './drawer/drawer';
 import './header.less';
 
 // 测试用的用户信息
@@ -27,9 +28,10 @@ export class LayoutHeader extends BI.Widget {
         let id = '弹出层id' + BI.UUID();
         BI.Drawers.create(id, {
             header: '设置页面',
+            headerHeight:60,
             body: {
-                type: 'bi.label',
-                text: '整体风格设置',
+                type: 'bi.vertical',
+                items: [<HeaderDrawer />],
             },
         }).show(id);
     }
@@ -52,15 +54,15 @@ export class LayoutHeader extends BI.Widget {
                             <BI.Combo
                                 trigger={'hover'}
                                 el={
-                                    <BI.VerticalAdaptLayout cls="user" width={100} height={HEADER_HEIGHT}>
-                                        <BI.Img cls="avatar" width={30} height={30} rgap={8} src={userInfo.avatarSrc} />
+                                    <BI.VerticalAdaptLayout cls="user" width={130} height={HEADER_HEIGHT}>
+                                        <BI.Img cls="avatar" width={40} height={40} rgap={8} src={userInfo.avatarSrc} />
                                         <BI.Text cls="name" text={userInfo.name} />
                                     </BI.VerticalAdaptLayout>
                                 }
                                 popup={{
-                                    animation: "bi-slide-up",
+                                    animation: 'bi-slide-up',
                                     animationDuring: 500,
-                                    el:<HeaderPopup/>
+                                    el: <HeaderPopup />,
                                 }}
                             />
                             <BI.IconButton

@@ -42,8 +42,8 @@ export class MenuItem extends BI.BasicButton {
         const { text, icon, level } = this.options;
 
         return (
-            <BI.VerticalAdaptLayout cls="app-base-menu-item-sub bi-list-item-active2" height={36} hgap={8}>
-                <BI.IconLabel cls={`icon ${icon}`} lgap={8 + 24 * level} />
+            <BI.VerticalAdaptLayout cls="app-base-menu-item-sub bi-list-item-active2" height={40} hgap={8}>
+                <BI.IconLabel cls={`icon ${icon}`} lgap={4 + 24 * level} />
                 <BI.Text cls="text" text={text} />
             </BI.VerticalAdaptLayout>
         );
