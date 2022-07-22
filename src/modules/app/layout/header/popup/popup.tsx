@@ -12,7 +12,7 @@ export class HeaderPopup extends BI.Widget {
         baseCls: 'app-layout-header-popup',
     };
 
-    private docUrl = 'https://fanruan.design/doc.html?post=';
+
     private githubUrl = 'https://github.com/chaos0156/fineui-starter';
     private arr = [
         {
@@ -27,18 +27,6 @@ export class HeaderPopup extends BI.Widget {
                     eventName: 'EVENT_CHANGE',
                     action: () => {
                         location.href = this.githubUrl;
-                    },
-                },
-            ],
-        },
-        {
-            text: '开发文档',
-            iconCls: 'docs-font',
-            listeners: [
-                {
-                    eventName: 'EVENT_CHANGE',
-                    action: () => {
-                        location.href = this.docUrl;
                     },
                 },
             ],

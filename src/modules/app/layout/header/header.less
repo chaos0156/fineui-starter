@@ -14,10 +14,10 @@
     .avatar {
       border-radius: 100%;
     }
-  }
-  .user:hover {
-    cursor: pointer;
-    background-color: @user-hover;
+    &:hover {
+      cursor: pointer;
+      background-color: @user-hover;
+    }
   }
   .name {
     font-size: @font-size-16;
@@ -27,6 +27,13 @@
     transition: all 0.3s, padding 0s;
     &:hover {
       background-color: @setting-background;
+    }
+  }
+  .detailButton {
+    font-size: @font-size-24;
+    transition: all 0.3s, padding 0s;
+    &:hover {
+      background-color: @user-hover;
     }
   }
 }

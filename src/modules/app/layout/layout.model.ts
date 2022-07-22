@@ -14,6 +14,7 @@ export default class LayoutModel extends Model {
             collapse: true,
             openedCards: [ROUTE_INFOS[0].value],
             activeCard: ROUTE_INFOS[0].value,
+            // headerColor:@menu-item-sub,
         };
     }
 }
@@ -22,4 +23,5 @@ interface LayoutModelState {
     collapse: boolean; // 是否展开二级菜单
     openedCards: string[]; // 打开卡片的key的集合
     activeCard: string; // 当前卡片的key
+    // headerColor: string; //Header 的颜色
 }
