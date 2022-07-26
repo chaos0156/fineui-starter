@@ -112,8 +112,8 @@ export class LayoutContent extends BI.Widget {
         this.store.handleCollapse();
         this.flag = !this.flag;
         this.iconRef.setIcon(this.flag ? 'left-font' : 'right-font');
+        console.log('who am i ', this.model);
     }
-
 
     // 生命周期函数
     public init() {
@@ -133,7 +133,7 @@ export class LayoutContent extends BI.Widget {
                 <BI.VerticalAdaptLayout>
                     <BI.IconChangeButton
                         cls={'changeButton'}
-                        iconCls="left-font"
+                        iconCls="right-font"
                         height={NAV_HEIGHT}
                         ref={ref => {
                             this.iconRef = ref;

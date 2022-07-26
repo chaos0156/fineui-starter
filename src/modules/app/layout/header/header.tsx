@@ -21,6 +21,9 @@ export class LayoutHeader extends BI.Widget {
         baseCls: 'app-layout-header',
     };
 
+    private logoUrl = 'https://www.fanruan.com/';
+    private docUrl = 'https://fanruan.design/doc.html?post=';
+
     /*
     打开Drawer */
     private showDrawer() {
@@ -36,17 +39,47 @@ export class LayoutHeader extends BI.Widget {
         }).show(id);
     }
 
+    /* 打开Popover */
+    private showPopover() {
+        BI.Popovers.removeAll();
+        var id = '弹出层id' + BI.UUID();
+        BI.Popovers.create(id, {
+            type: 'bi.bar_popover',
+            // String或者是json都行
+            header: '弹出层',
+            size: 'small',
+            body: {
+                type: 'bi.label',
+                text: '是否查看FineUI文档？',
+                css: { 'font-size': '20px' },
+            },
+            listeners: [
+                {
+                    eventName: 'EVENT_CANCEL',
+                    action: () => {
+                        BI.Msg.toast('点击了取消');
+                    },
+                },
+                {
+                    eventName: 'EVENT_CONFIRM',
+                    action: () => {
+                        BI.Msg.toast('点击了确定');
+                        location.href = this.docUrl;
+                    },
+                },
+            ],
+        }).show(id);
+    }
+
     public render() {
         const { APP_TITLE_TEXT, MAIN_MENU_WIDTH, HEADER_HEIGHT } = LayoutConstant;
-        const logoUrl = 'https://www.fanruan.com/';
-        const docUrl = 'https://fanruan.design/doc.html?post=';
         return (
             <BI.LeftRightVerticalAdaptLayout
                 rhgap={24}
                 items={{
                     left: [
                         <BI.CenterAdaptLayout cls="logo bi-high-light-background" width={MAIN_MENU_WIDTH} height={HEADER_HEIGHT}>
-                            <BI.A href={logoUrl} el={<BI.IconLabel cls="logo-font"></BI.IconLabel>} />
+                            <BI.A href={this.logoUrl} el={<BI.IconLabel cls="logo-font"></BI.IconLabel>} />
                         </BI.CenterAdaptLayout>,
                         <BI.Text cls="title" hgap={8} text={APP_TITLE_TEXT} />,
                     ],
@@ -72,7 +105,7 @@ export class LayoutHeader extends BI.Widget {
                                 cls="detail-font detailButton"
                                 title={'开发文档'}
                                 handler={() => {
-                                    location.href = docUrl;
+                                    this.showPopover();
                                 }}
                             />
                             <BI.IconButton

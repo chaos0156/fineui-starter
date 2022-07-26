@@ -91,7 +91,7 @@ export class Menu extends BI.Widget {
     }
 
     public render() {
-        const { itemStyle, value, isExpender } = this.options;
+        const { itemStyle, value} = this.options;
         const menuItems = this.getMenuItems();
         const vgap = itemStyle === MenuItemStyle.Main ? 24 : 0;
 
@@ -116,6 +116,12 @@ export class Menu extends BI.Widget {
                 ]}
             />
         );
+    }
+    /**
+     * mounted
+     */
+    public mounted() {
+        console.log(this.menuRef.element.get()[0].offsetWidth);
     }
 }
 

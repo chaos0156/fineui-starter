@@ -1,20 +1,29 @@
-import { shortcut } from '@core/decorator';
+import { shortcut, store } from '@core/decorator';
+import LayoutDrawerModel from './drawer.model';
 import './drawer.less';
 
 /**
  * Drawer
  */
 @shortcut()
+@store(LayoutDrawerModel)
 export class HeaderDrawer extends BI.Widget {
     static xtype = 'app.layout_header_drawer';
     public props = {
         baseCls: 'app-layout-header-drawer',
     };
+
+    private model: LayoutDrawerModel['model'];
+    private store: LayoutDrawerModel['store'];
+
     private lightStyle = 'https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg';
     private darkStyle = 'https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg';
 
+    private choosecolor: BI.ColorChooser;
+
     private changeColor() {
-        BI.Msg.toast('111');
+        let color = this.choosecolor.getValue();
+        this.store.setSiderColor(color);
     }
 
     private wholeStyle = (
@@ -22,47 +31,54 @@ export class HeaderDrawer extends BI.Widget {
             <BI.Label text="整体风格设置" textAlign="left"></BI.Label>
             <BI.HorizontalLayout tgap={10}>
                 <BI.Img
+                    // ref={ref=>{
+                    //     this.darkImg = ref
+                    // }}
                     src={this.darkStyle}
                     width={48}
                     height={42}
                     rgap={20}
+                    title={'暗黑菜单风格'}
                     listeners={[
                         {
                             eventName: 'EVENT_CHANGE',
-                            action: this.changeColor,
+                            action: () => {
+                                BI.Msg.toast('1111');
+                            },
                         },
                     ]}
                 ></BI.Img>
-                <BI.Img src={this.lightStyle} width={48} height={42}></BI.Img>
+                <BI.Img src={this.lightStyle} title={'亮色菜单风格'} width={48} height={42}></BI.Img>
             </BI.HorizontalLayout>
         </BI.VerticalLayout>
     );
 
     // 头部内容
-    private top = ['侧边栏主题色设置', 'Header 主题色设置'].map(item => {
+    private top = ['侧边栏主题色设置', 'Header 主题色设置'].map((item, index) => {
         return (
             <BI.VerticalLayout vgap={8}>
                 <BI.Label text={item} textAlign="left" vgap={5}></BI.Label>
                 <BI.VerticalAdaptLayout>
-                    <BI.IconButton
-                        cls={'theme-font'}
-                        rgap={20}
-                        css={{ 'font-size': '20px' }}
-                        handler={() => {
-                            this.changeColor();
-                        }}
-                    ></BI.IconButton>
-                    <BI.ColorChooser
-                        width={24}
-                        height={24}
-                        cls={'colorChoose'}
-                        listeners={[
-                            {
-                                eventName: 'EVENT_CHANGE',
-                                action: this.changeColor,
-                            },
-                        ]}
-                    ></BI.ColorChooser>
+                    <BI.IconLabel cls={'theme-font'} rgap={20} css={{ 'font-size': '20px' }}></BI.IconLabel>
+                    {index === 0 && (
+                        <BI.ColorChooser
+                            width={250}
+                            height={24}
+                            cls={'colorChoose'}
+                            value={'blue'}
+                            ref={ref => {
+                                this.choosecolor = ref;
+                            }}
+                            listeners={[
+                                {
+                                    eventName: 'EVENT_CHANGE',
+                                    action: () => {
+                                        this.changeColor();
+                                    },
+                                },
+                            ]}
+                        ></BI.ColorChooser>
+                    )}
                 </BI.VerticalAdaptLayout>
             </BI.VerticalLayout>
         );
@@ -103,6 +119,7 @@ export class HeaderDrawer extends BI.Widget {
     );
 
     public render() {
+        console.log('this.model',this.model)
         return (
             <BI.VerticalLayout>
                 <BI.VerticalLayout>{this.wholeStyle}</BI.VerticalLayout>

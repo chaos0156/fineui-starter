@@ -7,12 +7,13 @@ export default class LayoutSiderModel extends Model<{
         collapse: LayoutModel['TYPE']['collapse'];
         openedCards: LayoutModel['TYPE']['openedCards'];
         activeCard: LayoutModel['TYPE']['activeCard'];
+        siderColor:LayoutModel['TYPE']['siderColor'];
     };
     context: LayoutSiderModel['context'];
 }> {
     static xtype = 'app.model.layout_sider';
 
-    public context = <const>['openedCards', 'activeCard','collapse'];
+    public context = <const>['openedCards', 'activeCard','collapse','siderColor'];
 
     public actions = {
         /**
@@ -42,6 +43,12 @@ export default class LayoutSiderModel extends Model<{
         },
         valueOfCollapse:()=>{
             return this.model.collapse;
+        },
+        getBackgroundColor:()=>{
+            return this.model.siderColor;
+        },
+        setColor:(value:string)=>{
+            this.model.siderColor = value;
         }
     };
 }

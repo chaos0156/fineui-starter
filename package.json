@@ -13,6 +13,7 @@
     "prettier": "prettier --write \"./**/*.{js,ts,jsx,tsx,less}\""
   },
   "dependencies": {
+    "@fineui/core": "^1.0.9",
     "@fui/core": "^2.0.0"
   },
   "devDependencies": {
