@@ -1,8 +1,9 @@
-import { shortcut } from '@core/decorator';
+import { shortcut, store } from '@core/decorator';
 import LayoutConstant from '../layout.constant';
 import { HeaderPopup } from './popup/popup';
 import { HeaderDrawer } from './drawer/drawer';
 import './header.less';
+import LayoutHeaderModel from './header.model';
 
 // 测试用的用户信息
 const userInfo = {
@@ -14,6 +15,7 @@ const userInfo = {
  * 应用布局的顶栏，包括应用logo、标题和用户信息
  */
 @shortcut()
+@store(LayoutHeaderModel)
 export class LayoutHeader extends BI.Widget {
     static xtype = 'app.layout_header';
 
@@ -21,22 +23,35 @@ export class LayoutHeader extends BI.Widget {
         baseCls: 'app-layout-header',
     };
 
+    public watch = {
+        headerColor:()=>{
+            let color = this.store.getHeaderColor();
+            this.headerRef.element.css('background', `${color}`);
+        }
+    };
+    // private model: LayoutHeaderModel['model'];
+    private store: LayoutHeaderModel['store'];
     private logoUrl = 'https://www.fanruan.com/';
     private docUrl = 'https://fanruan.design/doc.html?post=';
-
+    private context = this;
+    private headerRef: BI.LeftRightVerticalAdaptLayout;
     /*
     打开Drawer */
     private showDrawer() {
         BI.Drawers.removeAll();
         let id = '弹出层id' + BI.UUID();
-        BI.Drawers.create(id, {
-            header: '设置页面',
-            headerHeight: 60,
-            body: {
-                type: 'bi.vertical',
-                items: [<HeaderDrawer />],
+        BI.Drawers.create(
+            id,
+            {
+                header: '设置页面',
+                headerHeight: 60,
+                body: {
+                    type: 'bi.vertical',
+                    items: [<HeaderDrawer />],
+                },
             },
-        }).show(id);
+            this.context
+        ).show(id);
     }
 
     /* 打开Popover */
@@ -71,10 +86,19 @@ export class LayoutHeader extends BI.Widget {
         }).show(id);
     }
 
+    // 初始化header背景色
+    private setDefaultColor() {
+        const defalutHeaderColor = this.store.getHeaderColor();
+        this.headerRef.element.css('background', defalutHeaderColor);
+    }
+
     public render() {
         const { APP_TITLE_TEXT, MAIN_MENU_WIDTH, HEADER_HEIGHT } = LayoutConstant;
         return (
             <BI.LeftRightVerticalAdaptLayout
+                ref={ref => {
+                    this.headerRef = ref;
+                }}
                 rhgap={24}
                 items={{
                     left: [
@@ -122,5 +146,12 @@ export class LayoutHeader extends BI.Widget {
                 }}
             />
         );
+    }
+    /**
+     * beforeMounted
+     * 在render方法里的子组件被渲染到页面之前，给子组件设置背景色
+     */
+    public beforeMount() {
+        this.setDefaultColor();
     }
 }

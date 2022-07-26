@@ -36,7 +36,7 @@ export class Menu extends BI.Widget {
         value: '',
         itemInfos: [],
         itemStyle: MenuItemStyle.Main,
-        isExpender:false,
+        menuitemColor:'',
     };
 
     private menuRef: CustomTree;
@@ -91,10 +91,9 @@ export class Menu extends BI.Widget {
     }
 
     public render() {
-        const { itemStyle, value} = this.options;
+        const { itemStyle, value,menuitemColor } = this.options;
         const menuItems = this.getMenuItems();
         const vgap = itemStyle === MenuItemStyle.Main ? 24 : 0;
-
         return (
             <BI.CustomTree
                 ref={ref => {
@@ -130,5 +129,5 @@ interface MenuProps {
     value: string;
     itemInfos: MenuItemInfo[];
     itemStyle: MenuItemStyle;
-    isExpender: boolean;
+    menuitemColor:string;
 }

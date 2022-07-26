@@ -19,11 +19,16 @@ export class HeaderDrawer extends BI.Widget {
     private lightStyle = 'https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg';
     private darkStyle = 'https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg';
 
-    private choosecolor: BI.ColorChooser;
+    private choosecolorSider: BI.ColorChooser;
+    private choosecolorHeader: BI.ColorChooser;
 
-    private changeColor() {
-        let color = this.choosecolor.getValue();
+    private changeSiderColor() {
+        let color = this.choosecolorSider.getValue();
         this.store.setSiderColor(color);
+    }
+    private changeHeaderColor() {
+        let color = this.choosecolorHeader.getValue();
+        this.store.setHeaderColor(color);
     }
 
     private wholeStyle = (
@@ -65,15 +70,32 @@ export class HeaderDrawer extends BI.Widget {
                             width={250}
                             height={24}
                             cls={'colorChoose'}
-                            value={'blue'}
                             ref={ref => {
-                                this.choosecolor = ref;
+                                this.choosecolorSider = ref;
                             }}
                             listeners={[
                                 {
                                     eventName: 'EVENT_CHANGE',
                                     action: () => {
-                                        this.changeColor();
+                                        this.changeSiderColor();
+                                    },
+                                },
+                            ]}
+                        ></BI.ColorChooser>
+                    )}
+                    {index === 1 && (
+                        <BI.ColorChooser
+                            width={250}
+                            height={24}
+                            cls={'colorChoose'}
+                            ref={ref => {
+                                this.choosecolorHeader = ref;
+                            }}
+                            listeners={[
+                                {
+                                    eventName: 'EVENT_CHANGE',
+                                    action: () => {
+                                        this.changeHeaderColor();
                                     },
                                 },
                             ]}
@@ -119,7 +141,6 @@ export class HeaderDrawer extends BI.Widget {
     );
 
     public render() {
-        console.log('this.model',this.model)
         return (
             <BI.VerticalLayout>
                 <BI.VerticalLayout>{this.wholeStyle}</BI.VerticalLayout>
@@ -128,5 +149,14 @@ export class HeaderDrawer extends BI.Widget {
                 <BI.VerticalLayout cls={'bottom'}>{this.bottom}</BI.VerticalLayout>
             </BI.VerticalLayout>
         );
+    }
+
+    /**
+     * beforeMount
+     */
+    public beforeMount() {
+        // 渲染之前设置header和sider的在选色器中的默认颜色
+        this.choosecolorSider.setValue(this.model.siderColor);
+        this.choosecolorHeader.setValue(this.model.headerColor);
     }
 }

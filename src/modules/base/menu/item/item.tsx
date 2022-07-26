@@ -40,9 +40,12 @@ export class MenuItem extends BI.BasicButton {
      */
     private createSubMenuItem() {
         const { text, icon, level } = this.options;
-
         return (
-            <BI.VerticalAdaptLayout cls="app-base-menu-item-sub bi-list-item-active2" height={40} hgap={8}>
+            <BI.VerticalAdaptLayout
+                cls="app-base-menu-item-sub bi-list-item-active2"
+                height={40}
+                hgap={8}
+            >
                 <BI.IconLabel cls={`icon ${icon}`} lgap={4 + 24 * level} />
                 <BI.Text cls="text" text={text} />
             </BI.VerticalAdaptLayout>
@@ -59,6 +62,13 @@ export class MenuItem extends BI.BasicButton {
 
         return menuItemStyleCreatorsMap[style]();
     }
+
+    /**
+     * beforeMount
+     */
+    // public beforeMount() {
+    //     this.setColor();
+    // }
 }
 
 interface MenuItemProps {

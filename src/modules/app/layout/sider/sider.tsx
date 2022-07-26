@@ -31,8 +31,9 @@ export class LayoutSider extends BI.Widget {
         },
         siderColor: () => {
             let color = this.store.getBackgroundColor();
-            console.log(color);
-            this.mainMenu.element.css('background',`${color}`);
+            this.subMenuRef.element.css('background', `${color}`);
+            this.subMenuRef.options.menuitemColor = color;
+            this.mainMenu.element.css('background', `${color}`);
         },
     };
 
@@ -76,16 +77,11 @@ export class LayoutSider extends BI.Widget {
         }
     }
 
-    private change() {
-        let color = '#ad975f'
-        this.store.setColor(color);
-        this.mainMenu.element.css('background', color );
-        console.log(this.model);
-
-    }
-
-    private setDefaultColor(color:string) {
-        this.mainMenu.element.css('background', color );
+    // 初始化sider背景色
+    private setDefaultColor() {
+        const defalutMainMenuColor = this.store.getBackgroundColor();
+        this.subMenuRef.element.css('background', defalutMainMenuColor);
+        this.mainMenu.element.css('background', defalutMainMenuColor);
     }
 
     public render() {
@@ -101,6 +97,7 @@ export class LayoutSider extends BI.Widget {
             };
         });
         const subMenuItemInfos = ROUTE_INFOS[0].children;
+        const defalutMainMenuColor = this.store.getBackgroundColor();
         return (
             <BI.HorizontalFillLayout columnSize={[MAIN_MENU_WIDTH, '']}>
                 {/* 一级菜单 */}
@@ -132,6 +129,7 @@ export class LayoutSider extends BI.Widget {
                     itemInfos={subMenuItemInfos}
                     itemStyle={MenuItemStyle.Sub}
                     value=""
+                    menuitemColor={defalutMainMenuColor}
                     listeners={[
                         {
                             eventName: Menu.EVENT.CHANGE,
@@ -142,7 +140,6 @@ export class LayoutSider extends BI.Widget {
                         },
                     ]}
                 />
-                <BI.Button handler={()=>{this.change()}}></BI.Button>
             </BI.HorizontalFillLayout>
         );
     }
@@ -152,7 +149,6 @@ export class LayoutSider extends BI.Widget {
      * 在render方法里的子组件被渲染到页面之前，给子组件设置背景色
      */
     public beforeMount() {
-        const defalutMainMenuColor = this.store.getBackgroundColor();
-        this.setDefaultColor(defalutMainMenuColor);
+        this.setDefaultColor();
     }
 }

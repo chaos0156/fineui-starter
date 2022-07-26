@@ -47,8 +47,5 @@ export default class LayoutSiderModel extends Model<{
         getBackgroundColor:()=>{
             return this.model.siderColor;
         },
-        setColor:(value:string)=>{
-            this.model.siderColor = value;
-        }
     };
 }
