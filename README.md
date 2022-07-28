@@ -5,16 +5,12 @@
 ### 克隆仓库
 
 ```shell
-git clone https://code.fineres.com/scm/fui/fineui-starter.git
+git clone git@github.com:chaos0156/fineui-starter.git
 ```
 
 ### 安装依赖
 
 ```shell
-# 账户：public
-# 密码：fr123456
-# 邮箱：任意
-npm adduser --registry https://npm.fineres.com
 npm install
 ```
 
@@ -39,7 +35,7 @@ npm run start
 # 打包
 npm run build
 
-# 测试
+# 单元测试
 npm run test
 ```
 
@@ -60,4 +56,4 @@ npm run prettier
 
 ## 效果预览
 
-![页面截图](./screenshots/demo.jpeg)
+![页面截图](./screenshots/demo.png)
