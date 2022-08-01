@@ -8,17 +8,18 @@ export default class LayoutModel extends Model {
 
 
     // 父组件定义childContext数组，表示需要将哪些数据放置到context内容中
-    public childContext = <const>['openedCards', 'activeCard','collapse','siderColor','headerColor'];
+    public childContext = <const>['openedCards', 'activeCard','collapse','siderColor','headerColor','fontColor'];
 
     // 默认值
     public state(): LayoutModelState {
-        const {SIDER_COLOR,HEADER_COLOR} = LayoutConstant;
+        const {SIDER_COLOR,HEADER_COLOR,DARK_FONT_COLOR} = LayoutConstant;
         return {
             collapse: true,
             openedCards: [ROUTE_INFOS[0].value],
             activeCard: ROUTE_INFOS[0].value,
             siderColor:SIDER_COLOR,
             headerColor:HEADER_COLOR,
+            fontColor:DARK_FONT_COLOR,
         };
     }
 }
@@ -29,4 +30,5 @@ interface LayoutModelState {
     activeCard: string; // 当前卡片的key
     siderColor: string; //Sider 的颜色
     headerColor:string; //Header 的颜色
+    fontColor:string; //默认字体颜色
 }

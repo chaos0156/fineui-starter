@@ -35,6 +35,11 @@ export class LayoutSider extends BI.Widget {
             this.subMenuRef.options.menuitemColor = color;
             this.mainMenu.element.css('background', `${color}`);
         },
+        fontColor: () => {
+            let color = this.store.getFontColor();
+            this.subMenuRef.element.css('color', color);
+            this.mainMenu.element.css('color', color);
+        },
     };
 
     private model: LayoutSiderModel['model'];
@@ -79,9 +84,12 @@ export class LayoutSider extends BI.Widget {
 
     // 初始化sider背景色
     private setDefaultColor() {
-        const defalutMainMenuColor = this.store.getBackgroundColor();
-        this.subMenuRef.element.css('background', defalutMainMenuColor);
-        this.mainMenu.element.css('background', defalutMainMenuColor);
+        const defaultMainMenuColor = this.store.getBackgroundColor();
+        const defaultFontColor = this.store.getFontColor();
+        this.subMenuRef.element.css('background', defaultMainMenuColor);
+        this.mainMenu.element.css('background', defaultMainMenuColor);
+        this.subMenuRef.element.css('color', defaultFontColor);
+        this.mainMenu.element.css('color', defaultFontColor);
     }
 
     public render() {

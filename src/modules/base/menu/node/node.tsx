@@ -1,7 +1,8 @@
 import { NodeButton, IconChangeButton } from '@fui/core';
-import { shortcut } from '@core/decorator';
+import { shortcut,store } from '@core/decorator';
 import { MenuItem } from '../item/item';
 import './node.less';
+import LayoutNodeModel from './node.model';
 
 // 节点展开和折叠状态分别对应的类名
 export const ARROW_CLASSES_MAP = {
@@ -13,8 +14,13 @@ export const ARROW_CLASSES_MAP = {
  * 菜单选项中的展开/折叠节点
  */
 @shortcut()
+@store(LayoutNodeModel)
 export class MenuNode extends BI.NodeButton {
     static xtype = 'app.base.menu_node';
+
+    private model: LayoutNodeModel['model'];
+    private store: LayoutNodeModel['store'];
+
 
     public props: MenuNodeProps & NodeButton['props'] = {
         baseCls: 'app-base-menu-node bi-list-item',
@@ -29,11 +35,19 @@ export class MenuNode extends BI.NodeButton {
 
     private arrowRef: IconChangeButton;
 
+    public watch = {
+        collapse: () => {
+            // this.setOpened(false);
+            this.triggerCollapse()
+        },
+    };
+
     /**
      * 设置菜单节点的展开情况
      * @param opened 要设置的展开情况，ture表示展开，false表示折叠
      */
     public setOpened(opened: boolean) {
+        console.log('setOpen',opened);
         Object.getPrototypeOf(MenuNode).prototype.setOpened.call(this, opened);
         const arrowCls = ARROW_CLASSES_MAP[opened ? 'expand' : 'collapse'];
         this.arrowRef.setIcon(arrowCls);

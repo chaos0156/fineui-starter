@@ -1,4 +1,4 @@
-import { Widget, BasicButton } from '@fui/core';
+import { BasicButton } from '@fui/core';
 import { shortcut } from '@core/decorator';
 import { MenuItemStyle } from '../menu';
 import './item.less';
@@ -23,7 +23,7 @@ export class MenuItem extends BI.BasicButton {
      * 创建Main风格的菜单选项组件
      * @returns 创建的菜单选项组件
      */
-    private createMainMenuItem(): Widget {
+    private createMainMenuItem() {
         const { text, icon } = this.options;
 
         return (
@@ -41,11 +41,7 @@ export class MenuItem extends BI.BasicButton {
     private createSubMenuItem() {
         const { text, icon, level } = this.options;
         return (
-            <BI.VerticalAdaptLayout
-                cls="app-base-menu-item-sub bi-list-item-active2"
-                height={40}
-                hgap={8}
-            >
+            <BI.VerticalAdaptLayout cls="app-base-menu-item-sub bi-list-item-active2" height={40} hgap={8}>
                 <BI.IconLabel cls={`icon ${icon}`} lgap={4 + 24 * level} />
                 <BI.Text cls="text" text={text} />
             </BI.VerticalAdaptLayout>

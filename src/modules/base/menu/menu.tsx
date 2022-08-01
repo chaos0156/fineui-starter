@@ -36,7 +36,7 @@ export class Menu extends BI.Widget {
         value: '',
         itemInfos: [],
         itemStyle: MenuItemStyle.Main,
-        menuitemColor:'',
+        menuitemColor: '',
     };
 
     private menuRef: CustomTree;
@@ -91,7 +91,7 @@ export class Menu extends BI.Widget {
     }
 
     public render() {
-        const { itemStyle, value,menuitemColor } = this.options;
+        const { itemStyle, value, menuitemColor } = this.options;
         const menuItems = this.getMenuItems();
         const vgap = itemStyle === MenuItemStyle.Main ? 24 : 0;
         return (
@@ -129,5 +129,5 @@ interface MenuProps {
     value: string;
     itemInfos: MenuItemInfo[];
     itemStyle: MenuItemStyle;
-    menuitemColor:string;
+    menuitemColor: string;
 }

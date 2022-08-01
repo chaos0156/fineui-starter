@@ -5,16 +5,20 @@ import LayoutModel from '../layout.model';
 export default class LayoutHeaderModel extends Model<{
     types: {
         headerColor:LayoutModel['TYPE']['headerColor'];
+        fontColor:LayoutModel['TYPE']['fontColor'];
     };
     context:  LayoutHeaderModel['context'];
 }> {
     static xtype = 'app.model.layout_header';
 
-    public context = <const>['headerColor'];
+    public context = <const>['headerColor','fontColor'];
 
     public actions = {
         getHeaderColor:()=>{
             return this.model.headerColor;
         },
+        getFontColor:()=>{
+            return this.model.fontColor;
+        }
     };
 }

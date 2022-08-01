@@ -8,12 +8,13 @@ export default class LayoutSiderModel extends Model<{
         openedCards: LayoutModel['TYPE']['openedCards'];
         activeCard: LayoutModel['TYPE']['activeCard'];
         siderColor:LayoutModel['TYPE']['siderColor'];
+        fontColor:LayoutModel['TYPE']['fontColor'];
     };
     context: LayoutSiderModel['context'];
 }> {
     static xtype = 'app.model.layout_sider';
 
-    public context = <const>['openedCards', 'activeCard','collapse','siderColor'];
+    public context = <const>['openedCards', 'activeCard','collapse','siderColor','fontColor'];
 
     public actions = {
         /**
@@ -47,5 +48,8 @@ export default class LayoutSiderModel extends Model<{
         getBackgroundColor:()=>{
             return this.model.siderColor;
         },
+        getFontColor:()=>{
+            return this.model.fontColor;
+        }
     };
 }

@@ -6,33 +6,34 @@
     background-color: @color-app-primary;
   }
   .title {
-    color: @title-color;
     font-size: @font-size-20;
   }
-  .user {
-    .avatar {
-      border-radius: 100%;
+  .headerright {
+    .user {
+      .avatar {
+        border-radius: 100%;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: @user-hover;
+      }
     }
-    &:hover {
-      cursor: pointer;
-      background-color: @user-hover;
+    .name {
+      font-size: @font-size-16;
     }
-  }
-  .name {
-    font-size: @font-size-16;
-  }
-  .settingButton {
-    font-size: @font-size-24;
-    transition: all 0.3s, padding 0s;
-    &:hover {
-      background-color: @setting-background;
+    .settingButton {
+      font-size: @font-size-24;
+      transition: all 0.3s, padding 0s;
+      &:hover {
+        background-color: @setting-background;
+      }
     }
-  }
-  .detailButton {
-    font-size: @font-size-24;
-    transition: all 0.3s, padding 0s;
-    &:hover {
-      background-color: @user-hover;
+    .detailButton {
+      font-size: @font-size-24;
+      transition: all 0.3s, padding 0s;
+      &:hover {
+        background-color: @user-hover;
+      }
     }
   }
 }

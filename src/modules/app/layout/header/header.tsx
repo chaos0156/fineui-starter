@@ -27,7 +27,11 @@ export class LayoutHeader extends BI.Widget {
         headerColor:()=>{
             let color = this.store.getHeaderColor();
             this.headerRef.element.css('background', `${color}`);
-        }
+        },
+        fontColor: () => {
+            let color = this.store.getFontColor();
+            this.headerRef.element.css('color', color);
+        },
     };
     // private model: LayoutHeaderModel['model'];
     private store: LayoutHeaderModel['store'];
@@ -78,7 +82,6 @@ export class LayoutHeader extends BI.Widget {
                 {
                     eventName: 'EVENT_CONFIRM',
                     action: () => {
-                        BI.Msg.toast('点击了确定');
                         location.href = this.docUrl;
                     },
                 },
@@ -86,10 +89,12 @@ export class LayoutHeader extends BI.Widget {
         }).show(id);
     }
 
-    // 初始化header背景色
+    // 初始化header背景色\字体颜色
     private setDefaultColor() {
         const defalutHeaderColor = this.store.getHeaderColor();
+        const defalutFontColor = this.store.getFontColor();
         this.headerRef.element.css('background', defalutHeaderColor);
+        this.headerRef.element.css('color',defalutFontColor);
     }
 
     public render() {
@@ -108,7 +113,7 @@ export class LayoutHeader extends BI.Widget {
                         <BI.Text cls="title" hgap={8} text={APP_TITLE_TEXT} />,
                     ],
                     right: [
-                        <BI.VerticalAdaptLayout rgap={10}>
+                        <BI.VerticalAdaptLayout cls={'headerright'} rgap={10}>
                             <BI.Combo
                                 trigger={'hover'}
                                 el={
