@@ -2,6 +2,7 @@ import { shortcut, store } from '@core/decorator';
 import './home.less';
 import LayoutHomeModel from './home.model';
 import { HomeProduct } from './product/product';
+import { HomeIntroduction } from './introduction/introduction';
 /**
  * 用于充当各一级菜单首页的测试组件
  */
@@ -10,8 +11,8 @@ import { HomeProduct } from './product/product';
 export class Home extends BI.Widget {
     static xtype = 'app.home';
 
-    private model: LayoutHomeModel['model'];
-    private store: LayoutHomeModel['store'];
+    // private model: LayoutHomeModel['model'];
+    // private store: LayoutHomeModel['store'];
     private segmentRef: BI.LinearSegment;
     private tabRef: BI.Layout;
     private cardRef: BI.VerticalLayout;
@@ -20,18 +21,12 @@ export class Home extends BI.Widget {
         cardName: '',
     };
 
-    public watch = {
-        chooseValue: () => {
-            let val = this.store.getValue();
-            this.showTab(val);
-        },
-    };
-
-    private showTab(val: number) {
+    private showTab() {
+        let val = this.segmentRef.getValue()[0];
         if (val === 1) {
-            this.tabRef.populate([<HomeProduct />]);
+            this.tabRef.populate([<HomeIntroduction />]);
         } else {
-            this.tabRef.populate([<BI.Label text="你好"></BI.Label>]);
+            this.tabRef.populate([<HomeProduct />]);
         }
     }
 
@@ -86,20 +81,19 @@ export class Home extends BI.Widget {
                     </BI.VerticalAdaptLayout>
                     <BI.LinearSegment
                         value={1}
-                        width={200}
+                        width={300}
                         ref={ref => {
                             this.segmentRef = ref;
                         }}
                         items={[
                             { text: '了解帆软', value: 1, items: { type: 'bi.label', text: '你好' } },
-                            { text: '帆软', value: 2 },
+                            { text: '产品解决方案', value: 2 },
                         ]}
                         listeners={[
                             {
                                 eventName: 'EVENT_CHANGE',
                                 action: () => {
-                                    let newVal = this.segmentRef.getValue()[0];
-                                    this.store.setValue(newVal);
+                                    this.showTab();
                                 },
                             },
                         ]}
@@ -115,7 +109,7 @@ export class Home extends BI.Widget {
     }
     // 初始时默认渲染value为1的组件
     public beforeMount() {
-        this.showTab(1);
+        this.showTab();
     }
 }
 

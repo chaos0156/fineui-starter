@@ -26,7 +26,6 @@ export class LayoutSider extends BI.Widget {
         },
         collapse: () => {
             let collapsed = this.store.valueOfCollapse();
-            this.store.openSingleCard('');
             this.subMenuRef.setWidth(collapsed ? this.subMenuWidth : 50);
         },
         siderColor: () => {

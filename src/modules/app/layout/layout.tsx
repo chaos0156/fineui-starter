@@ -19,7 +19,6 @@ export default class Layout extends BI.Widget {
     };
     public render() {
         const { HEADER_HEIGHT } = LayoutConstant;
-        console.log(this.model);
         return (
             <BI.VerticalFillLayout>
                 <LayoutHeader height={HEADER_HEIGHT} />
