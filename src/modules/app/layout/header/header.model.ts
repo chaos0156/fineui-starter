@@ -6,12 +6,13 @@ export default class LayoutHeaderModel extends Model<{
     types: {
         headerColor:LayoutModel['TYPE']['headerColor'];
         fontColor:LayoutModel['TYPE']['fontColor'];
+        headerShow:LayoutModel['TYPE']['headerShow'];
     };
     context:  LayoutHeaderModel['context'];
 }> {
     static xtype = 'app.model.layout_header';
 
-    public context = <const>['headerColor','fontColor'];
+    public context = <const>['headerColor','fontColor','headerShow'];
 
     public actions = {
         getHeaderColor:()=>{
@@ -19,6 +20,9 @@ export default class LayoutHeaderModel extends Model<{
         },
         getFontColor:()=>{
             return this.model.fontColor;
+        },
+        getHeaderShow:()=>{
+            return this.model.headerShow;
         }
     };
 }

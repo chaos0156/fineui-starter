@@ -174,6 +174,12 @@ export class LayoutContent extends BI.Widget {
                     cardCreator={key => this.contentsMap[key].card}
                     showIndex={ROUTE_INFOS[0].value}
                 />
+                <BI.IconButton
+                    width={50}
+                    height={50}
+                    title={'主题设置'}
+                    cls="setting-font settingtt"
+                />
             </BI.VTapeLayout>
         );
     }

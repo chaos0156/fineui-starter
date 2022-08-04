@@ -39,6 +39,14 @@ export class LayoutSider extends BI.Widget {
             this.subMenuRef.element.css('color', color);
             this.mainMenu.element.css('color', color);
         },
+        mainMenuShow: () => {
+            let state = this.store.getMainMenuShow();
+            this.mainMenu.element.css('display', state ? 'block' : 'none');
+        },
+        subMenuShow: () => {
+            let state = this.store.getSubMenuShow();
+            this.subMenuRef.element.css('display', state ? 'block' : 'none');
+        },
     };
 
     private model: LayoutSiderModel['model'];

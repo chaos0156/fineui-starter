@@ -24,13 +24,17 @@ export class LayoutHeader extends BI.Widget {
     };
 
     public watch = {
-        headerColor:()=>{
+        headerColor: () => {
             let color = this.store.getHeaderColor();
             this.headerRef.element.css('background', `${color}`);
         },
         fontColor: () => {
             let color = this.store.getFontColor();
             this.headerRef.element.css('color', color);
+        },
+        headerShow: () => {
+            let state = this.store.getHeaderShow();
+            this.headerRef.element.css('display', state ? 'flex' : 'none');
         },
     };
     // private model: LayoutHeaderModel['model'];
@@ -94,7 +98,7 @@ export class LayoutHeader extends BI.Widget {
         const defalutHeaderColor = this.store.getHeaderColor();
         const defalutFontColor = this.store.getFontColor();
         this.headerRef.element.css('background', defalutHeaderColor);
-        this.headerRef.element.css('color',defalutFontColor);
+        this.headerRef.element.css('color', defalutFontColor);
     }
 
     public render() {

@@ -8,7 +8,7 @@ import './drawer.less';
  */
 @shortcut()
 @store(LayoutDrawerModel)
-export class HeaderDrawer extends BI.Widget {
+export class Drawer extends BI.Widget {
     static xtype = 'app.layout_header_drawer';
     public props = {
         baseCls: 'app-layout-header-drawer',

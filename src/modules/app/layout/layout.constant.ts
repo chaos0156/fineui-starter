@@ -6,7 +6,7 @@ export default {
     NAV_HEIGHT: 36, // 导航栏高度
     SIDER_COLOR:'#001529', // 侧边栏的默认背景色
     HEADER_COLOR:'#002140',// Header的默认背景色
-    LIGHT_SIDER_COLOR:'#ddd',   // 亮色风格侧边栏背景色
+    LIGHT_SIDER_COLOR:'#eee',   // 亮色风格侧边栏背景色
     LIGHT_HEADER_COLOR:'#fff',  // 亮色风格Header背景色
     DARK_FONT_COLOR:'#fff', // 默认字体颜色
     LIGHT_FONT_COLOR:'#000',// 亮色风格字体颜色

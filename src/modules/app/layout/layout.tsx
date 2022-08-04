@@ -1,11 +1,10 @@
-import { shortcut,store } from '@core/decorator';
+import { shortcut, store } from '@core/decorator';
 import { LayoutHeader } from './header/header';
 import { LayoutSider } from './sider/sider';
 import { LayoutContent } from './content/content';
 import LayoutConstant from './layout.constant';
 import './layout.less';
 import LayoutModel from './layout.model';
-
 /**
  * 应用布局
  */
