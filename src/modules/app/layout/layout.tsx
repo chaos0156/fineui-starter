@@ -13,6 +13,7 @@ import LayoutModel from './layout.model';
 export default class Layout extends BI.Widget {
     static xtype = 'app.layout';
     private model: LayoutModel['model'];
+    private contentRef:LayoutContent;
     public props = {
         baseCls: 'app-layout',
     };
@@ -20,10 +21,17 @@ export default class Layout extends BI.Widget {
         const { HEADER_HEIGHT } = LayoutConstant;
         return (
             <BI.VerticalFillLayout>
-                <LayoutHeader height={HEADER_HEIGHT} />
+                <LayoutHeader height={HEADER_HEIGHT} listeners={[{
+                    eventName:LayoutHeader.EVENT.CHANGE,
+                    action:()=>{
+                        this.contentRef.setHome();
+                    }
+                }]}/>
                 <BI.HorizontalFillLayout cls="app-layout-body" columnSize={['', 'fill']} height={'fill'}>
                     <LayoutSider />
-                    <LayoutContent />
+                    <LayoutContent ref={ref=>{
+                        this.contentRef = ref
+                    }}/>
                 </BI.HorizontalFillLayout>
             </BI.VerticalFillLayout>
         );

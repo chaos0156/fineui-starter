@@ -1,5 +1,5 @@
 import { shortcut, store } from '@core/decorator';
-import { Menu, MenuItemInfo, MenuItemStyle } from '@base/menu/menu';
+import { Menu, MenuItemInfo, MenuItemStyle } from './menu/menu';
 import { RouteType, RouteInfo, ROUTE_INFOS } from '@/routes';
 import LayoutSiderModel from './sider.model';
 import LayoutConstant from '../layout.constant';
@@ -31,13 +31,13 @@ export class LayoutSider extends BI.Widget {
         siderColor: () => {
             let color = this.store.getBackgroundColor();
             this.subMenuRef.element.css('background', `${color}`);
-            this.subMenuRef.options.menuitemColor = color;
             this.mainMenu.element.css('background', `${color}`);
         },
         fontColor: () => {
             let color = this.store.getFontColor();
             this.subMenuRef.element.css('color', color);
             this.mainMenu.element.css('color', color);
+            this.mainMenu.setClass(color === '#fff'? 'dark':'light')
         },
         mainMenuShow: () => {
             let state = this.store.getMainMenuShow();
@@ -112,7 +112,6 @@ export class LayoutSider extends BI.Widget {
             };
         });
         const subMenuItemInfos = ROUTE_INFOS[0].children;
-        const defalutMainMenuColor = this.store.getBackgroundColor();
         return (
             <BI.HorizontalFillLayout columnSize={[MAIN_MENU_WIDTH, '']}>
                 {/* 一级菜单 */}
@@ -144,7 +143,6 @@ export class LayoutSider extends BI.Widget {
                     itemInfos={subMenuItemInfos}
                     itemStyle={MenuItemStyle.Sub}
                     value=""
-                    menuitemColor={defalutMainMenuColor}
                     listeners={[
                         {
                             eventName: Menu.EVENT.CHANGE,

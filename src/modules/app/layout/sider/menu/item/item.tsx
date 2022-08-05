@@ -10,6 +10,8 @@ import './item.less';
 export class MenuItem extends BI.BasicButton {
     static xtype = 'app.base.menu_item';
 
+    private mainMenuRef: BI.VerticalLayout;
+
     public props: MenuItemProps & BasicButton['props'] = {
         baseCls: 'app-base-menu-item',
         value: '',
@@ -19,6 +21,20 @@ export class MenuItem extends BI.BasicButton {
         style: MenuItemStyle.Main,
     };
 
+    public changeClass(style: string) {
+        console.log('bbbbb',style)
+        if (style === 'light') {
+            console.log('cccccc',style)
+            // this.mainMenuRef.element.get(0).classList.remove('app-list-item-border-left')
+            // this.mainMenuRef.element.get(0).classList.add('app-list-item-border-left-light')
+            console.log(this.mainMenuRef.element.get(0).classList.contains('app-list-item-border-left.active'))
+            this.mainMenuRef.element.css('color','#000')
+        } else {
+            this.mainMenuRef.element.get(0).classList.remove('app-list-item-border-left-light')
+            this.mainMenuRef.element.get(0).classList.add('app-list-item-border-left')
+        }
+    }
+
     /**
      * 创建Main风格的菜单选项组件
      * @returns 创建的菜单选项组件
@@ -27,7 +43,12 @@ export class MenuItem extends BI.BasicButton {
         const { text, icon } = this.options;
 
         return (
-            <BI.VerticalLayout cls="app-base-menu-item-main app-list-item-border-left">
+            <BI.VerticalLayout
+                ref={ref => {
+                    this.mainMenuRef = ref;
+                }}
+                cls="app-base-menu-item-main app-list-item-border-left"
+            >
                 <BI.IconLabel cls={`icon ${icon} icon-size-30`} height={48} />
                 <BI.Label cls="text" text={text} height={24} />
             </BI.VerticalLayout>
@@ -58,13 +79,6 @@ export class MenuItem extends BI.BasicButton {
 
         return menuItemStyleCreatorsMap[style]();
     }
-
-    /**
-     * beforeMount
-     */
-    // public beforeMount() {
-    //     this.setColor();
-    // }
 }
 
 interface MenuItemProps {

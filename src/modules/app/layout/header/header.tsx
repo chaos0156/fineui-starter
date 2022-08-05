@@ -1,7 +1,6 @@
 import { shortcut, store } from '@core/decorator';
 import LayoutConstant from '../layout.constant';
 import { HeaderPopup } from './popup/popup';
-import { HeaderDrawer } from './drawer/drawer';
 import './header.less';
 import LayoutHeaderModel from './header.model';
 
@@ -23,6 +22,10 @@ export class LayoutHeader extends BI.Widget {
         baseCls: 'app-layout-header',
     };
 
+    static EVENT = {
+        CHANGE: 'EVENT_CHANGE',
+    };
+
     public watch = {
         headerColor: () => {
             let color = this.store.getHeaderColor();
@@ -41,26 +44,7 @@ export class LayoutHeader extends BI.Widget {
     private store: LayoutHeaderModel['store'];
     private logoUrl = 'https://www.fanruan.com/';
     private docUrl = 'https://fanruan.design/doc.html?post=';
-    private context = this;
     private headerRef: BI.LeftRightVerticalAdaptLayout;
-    /*
-    打开Drawer */
-    private showDrawer() {
-        BI.Drawers.removeAll();
-        let id = '弹出层id' + BI.UUID();
-        BI.Drawers.create(
-            id,
-            {
-                header: '设置页面',
-                headerHeight: 60,
-                body: {
-                    type: 'bi.vertical',
-                    items: [<HeaderDrawer />],
-                },
-            },
-            this.context
-        ).show(id);
-    }
 
     /* 打开Popover */
     private showPopover() {
@@ -68,7 +52,6 @@ export class LayoutHeader extends BI.Widget {
         var id = '弹出层id' + BI.UUID();
         BI.Popovers.create(id, {
             type: 'bi.bar_popover',
-            // String或者是json都行
             header: '弹出层',
             size: 'small',
             body: {
@@ -129,7 +112,12 @@ export class LayoutHeader extends BI.Widget {
                                 popup={{
                                     animation: 'bi-slide-up',
                                     animationDuring: 500,
-                                    el: <HeaderPopup />,
+                                    el: <HeaderPopup listeners={[{
+                                        eventName:HeaderPopup.EVENT.CHANGE,
+                                        action:()=> {
+                                            this.fireEvent(LayoutHeader.EVENT.CHANGE)
+                                        }
+                                    }]}/>
                                 }}
                             />
                             <BI.IconButton
@@ -139,15 +127,6 @@ export class LayoutHeader extends BI.Widget {
                                 title={'开发文档'}
                                 handler={() => {
                                     this.showPopover();
-                                }}
-                            />
-                            <BI.IconButton
-                                width={50}
-                                height={HEADER_HEIGHT}
-                                title={'主题设置'}
-                                cls="setting-font settingButton"
-                                handler={() => {
-                                    this.showDrawer();
                                 }}
                             />
                         </BI.VerticalAdaptLayout>,

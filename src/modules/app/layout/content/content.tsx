@@ -1,10 +1,11 @@
 import { Tab } from '@fui/core';
 import { shortcut, store } from '@core/decorator';
-import { Nav, NavItemInfo, NavItemStyle } from '@base/nav/nav';
+import { Nav, NavItemInfo, NavItemStyle } from './nav/nav';
 import { RouteType, RouteInfo, ROUTE_INFOS } from '@/routes';
 import LayoutContentModel from './content.model';
 import LayoutConstant from '../layout.constant';
 import './content.less';
+import { DrawerSetting } from './drawerSetting/drawerSetting';
 
 // 路由信息value与页面内容的映射关系，可以理解成一个经过faltten的路由信息集合
 export interface ContentsMap {
@@ -114,6 +115,10 @@ export class LayoutContent extends BI.Widget {
         this.iconRef.setIcon(this.flag ? 'left-font' : 'right-font');
     }
 
+    public setHome() {
+        this.store.changeCard('directory')
+    }
+
     // 生命周期函数
     public init() {
         this.initContentsMap([{ value: '', text: 'blank', icon: '' }, ...ROUTE_INFOS], false);
@@ -127,45 +132,54 @@ export class LayoutContent extends BI.Widget {
         const navItemType = navItemInfo.type as RouteType;
         const navItemStyle = ROUTE_TYPE_NAV_ITEM_STYLE_MAP[navItemType];
 
+
         return (
             <BI.VTapeLayout>
-                <BI.VerticalAdaptLayout height={NAV_HEIGHT}>
-                    <BI.IconChangeButton
-                        cls={'changeButton'}
-                        iconCls="right-font"
-                        height={NAV_HEIGHT}
-                        ref={ref => {
-                            this.iconRef = ref;
-                        }}
-                        handler={() => {
-                            this.toggle();
-                        }}
-                    ></BI.IconChangeButton>
-                    <Nav
-                        ref={ref => {
-                            this.navRef = ref;
-                        }}
-                        cls="nav bi-background"
-                        itemInfos={[navItemInfo]}
-                        itemStyle={navItemStyle}
-                        value={ROUTE_INFOS[0].value}
-                        listeners={[
-                            {
-                                eventName: Nav.EVENT.CHANGE,
-                                action: (value: string) => {
-                                    this.store.changeCard(value);
-                                },
-                            },
-                            {
-                                eventName: Nav.EVENT.CLOSE,
-                                action: (value: string) => {
-                                    this.store.closeCard(value);
-                                    this.tabRef.removeTab(value);
-                                },
-                            },
-                        ]}
-                    />
-                </BI.VerticalAdaptLayout>
+                <BI.LeftRightVerticalAdaptLayout
+                    height={NAV_HEIGHT}
+                    items={{
+                        left: [
+                            <BI.VerticalAdaptLayout>
+                                <BI.IconChangeButton
+                                    cls={'changeButton'}
+                                    iconCls="right-font"
+                                    height={NAV_HEIGHT}
+                                    ref={ref => {
+                                        this.iconRef = ref;
+                                    }}
+                                    handler={() => {
+                                        this.toggle();
+                                    }}
+                                ></BI.IconChangeButton>
+                                <Nav
+                                    ref={ref => {
+                                        this.navRef = ref;
+                                    }}
+                                    cls="nav bi-background"
+                                    itemInfos={[navItemInfo]}
+                                    itemStyle={navItemStyle}
+                                    value={ROUTE_INFOS[0].value}
+                                    listeners={[
+                                        {
+                                            eventName: Nav.EVENT.CHANGE,
+                                            action: (value: string) => {
+                                                this.store.changeCard(value);
+                                            },
+                                        },
+                                        {
+                                            eventName: Nav.EVENT.CLOSE,
+                                            action: (value: string) => {
+                                                this.store.closeCard(value);
+                                                this.tabRef.removeTab(value);
+                                            },
+                                        },
+                                    ]}
+                                />
+                            </BI.VerticalAdaptLayout>,
+                        ],
+                        right: [<DrawerSetting />],
+                    }}
+                />
                 <BI.Tab
                     ref={ref => {
                         this.tabRef = ref;
@@ -173,12 +187,6 @@ export class LayoutContent extends BI.Widget {
                     cls="card bi-card"
                     cardCreator={key => this.contentsMap[key].card}
                     showIndex={ROUTE_INFOS[0].value}
-                />
-                <BI.IconButton
-                    width={50}
-                    height={50}
-                    title={'主题设置'}
-                    cls="setting-font settingtt"
                 />
             </BI.VTapeLayout>
         );

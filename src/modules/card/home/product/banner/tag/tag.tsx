@@ -21,7 +21,7 @@ export class Tag extends BI.Widget {
                 cls:'tag'
             };
         });
-        return <BI.FloatLeftLayout>{tagGroup}</BI.FloatLeftLayout>;
+        return <BI.FloatLeftLayout height={88}>{tagGroup}</BI.FloatLeftLayout>;
     }
 }
 interface TagProps {

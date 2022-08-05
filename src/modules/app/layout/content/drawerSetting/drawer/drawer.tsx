@@ -1,6 +1,6 @@
 import { shortcut, store } from '@core/decorator';
 import LayoutDrawerModel from './drawer.model';
-import LayoutConstant from '../../layout.constant';
+import LayoutConstant from '@/modules/app/layout/layout.constant';
 import './drawer.less';
 
 /**
@@ -82,6 +82,17 @@ export class Drawer extends BI.Widget {
         } else {
             BI.Msg.toast('隐藏二级侧边栏', { level: 'warning' });
         }
+    }
+
+    // 恢复默认设置
+    private restoreDefault() {
+        this.chooseDarkStyle();
+        this.store.setHeaderShow(true);
+        this.store.setMainMenuShow(true);
+        this.store.setSubMenuShow(true);
+        this.switchHeaderRef.setSelected(this.store.getHeaderShow());
+        this.switchMainMenuRef.setSelected(this.store.getMainMenuShow());
+        this.switchSubMenuRef.setSelected(this.store.getSubMenuShow());
     }
 
     private wholeStyle = (
@@ -268,7 +279,7 @@ export class Drawer extends BI.Widget {
                 level={'success'}
                 handler={() => {
                     BI.Msg.toast('恢复默认设置成功', { level: 'success' });
-                    this.chooseDarkStyle();
+                    this.restoreDefault();
                 }}
             ></BI.Button>
         </BI.VerticalLayout>

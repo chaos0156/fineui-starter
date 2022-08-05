@@ -11,7 +11,7 @@ export class DrawerSetting extends BI.Widget {
         baseCls: 'app-layout-drawerSetting',
     };
 
-        /*
+    /*
     打开Drawer */
     private showDrawer() {
         BI.Drawers.removeAll();
@@ -32,15 +32,15 @@ export class DrawerSetting extends BI.Widget {
 
     public render() {
         return (
-            <BI.IconButton
-                width={50}
-                height={50}
-                title={'主题设置'}
-                cls="setting-font settingButton"
-                handler={() => {
-                    this.showDrawer();
-                }}
-            />
+                <BI.IconButton
+                    width={50}
+                    height={36}
+                    title={'主题设置'}
+                    cls="setting-font settingButton"
+                    handler={() => {
+                        this.showDrawer();
+                    }}
+                />
         );
     }
 }

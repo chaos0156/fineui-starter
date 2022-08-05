@@ -12,6 +12,10 @@ export class HeaderPopup extends BI.Widget {
         baseCls: 'app-layout-header-popup',
     };
 
+    static EVENT = {
+        CHANGE: 'EVENT_CHANGE',
+    };
+
     private githubUrl = 'https://github.com/chaos0156/fineui-starter';
 
     /* 打开Popover */
@@ -20,7 +24,6 @@ export class HeaderPopup extends BI.Widget {
         var id = '弹出层id' + BI.UUID();
         BI.Popovers.create(id, {
             type: 'bi.bar_popover',
-            // String或者是json都行
             header: '弹出层',
             size: 'small',
             body: {
@@ -50,6 +53,14 @@ export class HeaderPopup extends BI.Widget {
         {
             text: '首页',
             iconCls: 'dashboard-font',
+            listeners: [
+                {
+                    eventName: 'EVENT_CHANGE',
+                    action: () => {
+                        this.fireEvent(HeaderPopup.EVENT.CHANGE)
+                    },
+                },
+            ],
         },
         {
             text: '项目地址',

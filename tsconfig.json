@@ -1,6 +1,6 @@
 {
     "extends": "@fui/typescript-configs/application.json",
-    "include": ["src/*.ts", "src/*.tsx", "src/**/*.ts", "src/**/*.tsx", "test", "typings"],
+    "include": ["src/*.ts", "src/*.tsx", "src/**/*.ts", "src/**/*.tsx", "test", "typings/*.ts"],
     "compilerOptions": {
         /* 基本选项 */
         "jsx": "react",

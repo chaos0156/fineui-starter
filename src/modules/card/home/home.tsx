@@ -40,7 +40,7 @@ export class Home extends BI.Widget {
         const description = [
             { text: 'FineUI是一套视图层框架，与其他框架不同的是，FineUI专注于页面构图与自定义' },
             { text: 'FineUI是一套数据流框架，与其他框架不同的是，FineUI可以做到把视图与状态完全分离，设计灵感来源于Vue的响应式方案' },
-            { text: 'FineUI还是一套组件库，利用FineUI，我们实现了一套面向企业级应用而设计的组件库供大家使用，组件库里列出了这些组件' },
+            { text: 'FineUI还是一套组件库，利用FineUI，我们实现了一套面向企业级应用而设计的组件库供大家使用' },
         ].map(item => {
             return Object.assign(
                 {
