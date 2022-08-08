@@ -27,8 +27,7 @@ export class MenuItem extends BI.BasicButton {
             console.log('cccccc',style)
             // this.mainMenuRef.element.get(0).classList.remove('app-list-item-border-left')
             // this.mainMenuRef.element.get(0).classList.add('app-list-item-border-left-light')
-            console.log(this.mainMenuRef.element.get(0).classList.contains('app-list-item-border-left.active'))
-            this.mainMenuRef.element.css('color','#000')
+            console.log(this.mainMenuRef.element.get(0).classList.contains('active'))
         } else {
             this.mainMenuRef.element.get(0).classList.remove('app-list-item-border-left-light')
             this.mainMenuRef.element.get(0).classList.add('app-list-item-border-left')
