@@ -15,16 +15,17 @@ export class DrawerSetting extends BI.Widget {
     打开Drawer */
     private showDrawer() {
         BI.Drawers.removeAll();
-        let id = '弹出层id' + BI.UUID();
+        const id = '弹出层id' + BI.UUID();
         BI.Drawers.create(
             id,
             {
                 header: '设置页面',
                 headerHeight: 60,
-                body: {
-                    type: 'bi.vertical',
-                    items: [<Drawer />],
-                },
+                body: (
+                    <BI.VerticalLayout>
+                        <Drawer />
+                    </BI.VerticalLayout>
+                ),
             },
             this.context
         ).show(id);
@@ -32,15 +33,15 @@ export class DrawerSetting extends BI.Widget {
 
     public render() {
         return (
-                <BI.IconButton
-                    width={50}
-                    height={36}
-                    title={'主题设置'}
-                    cls="setting-font settingButton"
-                    handler={() => {
-                        this.showDrawer();
-                    }}
-                />
+            <BI.IconButton
+                width={50}
+                height={36}
+                title={'主题设置'}
+                cls="setting-font settingButton"
+                handler={() => {
+                    this.showDrawer();
+                }}
+            />
         );
     }
 }

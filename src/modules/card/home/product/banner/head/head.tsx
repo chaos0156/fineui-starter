@@ -19,11 +19,11 @@ export class Head extends BI.Widget {
     ];
     public render() {
         const { text1, text2, place } = this.options;
-        let Img:BI.Img;
+        let Img;
         if (place == 2) {
-           Img = <BI.Img src={this.img[place]} width={135} height={135} cls={'imgr'} lgap={50}></BI.Img>;
+            Img = <BI.Img src={this.img[place]} width={135} height={135} cls={'imgr'} lgap={50}></BI.Img>;
         } else {
-           Img = <BI.Img src={this.img[place]} width={340} height={170} cls={'img'} lgap={60}></BI.Img>;
+            Img = <BI.Img src={this.img[place]} width={340} height={170} cls={'img'} lgap={60}></BI.Img>;
         }
         return (
             <BI.HorizontalLayout height={135} cls={'head'} scrollable={false}>

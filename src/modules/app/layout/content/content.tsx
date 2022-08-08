@@ -1,4 +1,4 @@
-import { Tab } from '@fui/core';
+import { Tab,IconChangeButton } from '@fui/core';
 import { shortcut, store } from '@core/decorator';
 import { Nav, NavItemInfo, NavItemStyle } from './nav/nav';
 import { RouteType, RouteInfo, ROUTE_INFOS } from '@/routes';
@@ -46,7 +46,7 @@ export class LayoutContent extends BI.Widget {
     private store: LayoutContentModel['store'];
     private navRef: Nav;
     private tabRef: Tab;
-    private iconRef: BI.IconChangeButton;
+    private iconRef: IconChangeButton;
     private flag: boolean;
     private contentsMap: ContentsMap;
 
@@ -110,11 +110,12 @@ export class LayoutContent extends BI.Widget {
     /*
     Hamburger处理函数*/
     private toggle() {
-        this.store.handleCollapse();
+        this.store.handleToggleCollapse();
         this.flag = !this.flag;
         this.iconRef.setIcon(this.flag ? 'left-font' : 'right-font');
     }
 
+    // 打开首页
     public setHome() {
         this.store.changeCard('directory')
     }

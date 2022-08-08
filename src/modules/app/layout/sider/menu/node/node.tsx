@@ -18,10 +18,6 @@ export const ARROW_CLASSES_MAP = {
 export class MenuNode extends BI.NodeButton {
     static xtype = 'app.base.menu_node';
 
-    private model: LayoutNodeModel['model'];
-    private store: LayoutNodeModel['store'];
-
-
     public props: MenuNodeProps & NodeButton['props'] = {
         baseCls: 'app-base-menu-node bi-list-item',
         height: 36,
@@ -37,7 +33,6 @@ export class MenuNode extends BI.NodeButton {
 
     public watch = {
         collapse: () => {
-            // this.setOpened(false);
             this.triggerCollapse()
         },
     };
@@ -47,7 +42,6 @@ export class MenuNode extends BI.NodeButton {
      * @param opened 要设置的展开情况，ture表示展开，false表示折叠
      */
     public setOpened(opened: boolean) {
-        console.log('setOpen',opened);
         Object.getPrototypeOf(MenuNode).prototype.setOpened.call(this, opened);
         const arrowCls = ARROW_CLASSES_MAP[opened ? 'expand' : 'collapse'];
         this.arrowRef.setIcon(arrowCls);

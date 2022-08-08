@@ -1,4 +1,5 @@
 import { shortcut, store } from '@core/decorator';
+import {LinearSegment,Layout} from '@fui/core';
 import './home.less';
 import LayoutHomeModel from './home.model';
 import { HomeProduct } from './product/product';
@@ -11,18 +12,15 @@ import { HomeIntroduction } from './introduction/introduction';
 export class Home extends BI.Widget {
     static xtype = 'app.home';
 
-    // private model: LayoutHomeModel['model'];
-    // private store: LayoutHomeModel['store'];
-    private segmentRef: BI.LinearSegment;
-    private tabRef: BI.Layout;
-    private cardRef: BI.VerticalLayout;
+    private segmentRef: LinearSegment;
+    private tabRef: Layout;
     public props: HomeProps = {
         baseCls: 'app-home',
         cardName: '',
     };
 
     private showTab() {
-        let val = this.segmentRef.getValue()[0];
+        const val = this.segmentRef.getValue()[0];
         if (val === 1) {
             this.tabRef.populate([<HomeIntroduction />]);
         } else {
@@ -55,7 +53,7 @@ export class Home extends BI.Widget {
         return (
             <BI.VerticalLayout hgap={25} vgap={25}>
                 <BI.Label text={labelText} textAlign={'left'}></BI.Label>
-                <BI.VerticalLayout cls={'description'} ref={ref => (this.cardRef = ref)}>
+                <BI.VerticalLayout cls={'description'}>
                     <BI.VerticalAdaptLayout>
                         <BI.VerticalLayout>
                             <BI.Label text={headline} textAlign={'left'} cls="headline"></BI.Label>

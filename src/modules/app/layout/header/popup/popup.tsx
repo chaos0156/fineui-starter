@@ -26,11 +26,7 @@ export class HeaderPopup extends BI.Widget {
             type: 'bi.bar_popover',
             header: '弹出层',
             size: 'small',
-            body: {
-                type: 'bi.label',
-                text: '是否打开项目地址？',
-                css: { 'font-size': '20px' },
-            },
+            body: <BI.Label css= {{ 'font-size': '20px' }}>{'是否打开项目地址？'}</BI.Label>,
             listeners: [
                 {
                     eventName: 'EVENT_CANCEL',

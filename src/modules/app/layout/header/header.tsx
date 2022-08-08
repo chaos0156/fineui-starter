@@ -3,7 +3,7 @@ import LayoutConstant from '../layout.constant';
 import { HeaderPopup } from './popup/popup';
 import './header.less';
 import LayoutHeaderModel from './header.model';
-
+import {LeftRightVerticalAdaptLayout} from "@fui/core";
 // 测试用的用户信息
 const userInfo = {
     name: 'Fanruan BI',
@@ -28,23 +28,22 @@ export class LayoutHeader extends BI.Widget {
 
     public watch = {
         headerColor: () => {
-            let color = this.store.getHeaderColor();
+            const color = this.model.headerColor;
             this.headerRef.element.css('background', `${color}`);
         },
         fontColor: () => {
-            let color = this.store.getFontColor();
+            const color = this.model.fontColor;
             this.headerRef.element.css('color', color);
         },
         headerShow: () => {
-            let state = this.store.getHeaderShow();
+            const state = this.model.headerShow;
             this.headerRef.element.css('display', state ? 'flex' : 'none');
         },
     };
-    // private model: LayoutHeaderModel['model'];
-    private store: LayoutHeaderModel['store'];
+    private model: LayoutHeaderModel['model'];
     private logoUrl = 'https://www.fanruan.com/';
     private docUrl = 'https://fanruan.design/doc.html?post=';
-    private headerRef: BI.LeftRightVerticalAdaptLayout;
+    private headerRef: LeftRightVerticalAdaptLayout;
 
     /* 打开Popover */
     private showPopover() {
@@ -78,8 +77,8 @@ export class LayoutHeader extends BI.Widget {
 
     // 初始化header背景色\字体颜色
     private setDefaultColor() {
-        const defalutHeaderColor = this.store.getHeaderColor();
-        const defalutFontColor = this.store.getFontColor();
+        const defalutHeaderColor = this.model.headerColor;
+        const defalutFontColor = this.model.fontColor;
         this.headerRef.element.css('background', defalutHeaderColor);
         this.headerRef.element.css('color', defalutFontColor);
     }

@@ -7,12 +7,12 @@
   color: @color-bi-text-gray;
   &:hover,
   &.hover {
-    color: @color-bi-text-white;
+    color: rgba(86, 135, 241, 0.801);
   }
   &.active,
   &:active {
-    border-left: 4px solid white;
-    color: @color-bi-text-white;
+    border-left: 4px solid rgb(86, 135, 241);
+    color: rgb(86, 135, 241);
   }
   &.disabled {
     &,
@@ -22,30 +22,6 @@
     }
   }
 }
-
-.app-list-item-border-left-light {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  color: @color-bi-text-gray;
-  &:hover,
-  &.hover {
-    color: #222;
-  }
-  &.active,
-  &:active {
-    border-left: 4px solid #000;
-    color: #000;
-  }
-  &.disabled {
-    &,
-    &:hover,
-    &:active {
-      color: @color-bi-text-disabled !important;
-    }
-  }
-}
-
-
 // 下划线式列表选项
 .app-list-item-underline {
   .box-sizing(border-box);

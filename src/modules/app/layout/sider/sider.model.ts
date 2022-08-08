@@ -44,20 +44,5 @@ export default class LayoutSiderModel extends Model<{
             this.model.openedCards = [];
             this.model.activeCard = '';
         },
-        valueOfCollapse:()=>{
-            return this.model.collapse;
-        },
-        getBackgroundColor:()=>{
-            return this.model.siderColor;
-        },
-        getFontColor:()=>{
-            return this.model.fontColor;
-        },
-        getMainMenuShow:() =>{
-           return this.model.mainMenuShow;
-        },
-        getSubMenuShow:() =>{
-            return this.model.subMenuShow;
-        }
     };
 }

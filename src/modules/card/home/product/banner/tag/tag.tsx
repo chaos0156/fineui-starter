@@ -13,13 +13,11 @@ export class Tag extends BI.Widget {
     public render() {
         const { tags } = this.options;
         let tagGroup = tags.map(item => {
-            return {
-                type: 'bi.label',
-                text: item,
-                width: 100,
-                height: 36,
-                cls:'tag'
-            };
+            return (
+                <BI.Label width={100} height={36} cls={'tag'}>
+                    {item}
+                </BI.Label>
+            );
         });
         return <BI.FloatLeftLayout height={88}>{tagGroup}</BI.FloatLeftLayout>;
     }

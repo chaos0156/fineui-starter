@@ -2,6 +2,7 @@ import { shortcut, store } from '@core/decorator';
 import LayoutDrawerModel from './drawer.model';
 import LayoutConstant from '@/modules/app/layout/layout.constant';
 import './drawer.less';
+import { Switch,ColorChooser } from '@fui/core';
 
 /**
  * Drawer
@@ -16,20 +17,20 @@ export class Drawer extends BI.Widget {
 
     private model: LayoutDrawerModel['model'];
     private store: LayoutDrawerModel['store'];
-    private switchHeaderRef: BI.Switch;
-    private switchMainMenuRef: BI.Switch;
-    private switchSubMenuRef: BI.Switch;
-    private choosecolorSider: BI.ColorChooser;
-    private choosecolorHeader: BI.ColorChooser;
+    private switchHeaderRef: Switch;
+    private switchMainMenuRef: Switch;
+    private switchSubMenuRef: Switch;
+    private choosecolorSider: ColorChooser;
+    private choosecolorHeader: ColorChooser;
 
     // 修改侧边栏背景色
-    private changeSiderColor() {
-        let color = this.choosecolorSider.getValue();
+    private updateSiderColor() {
+        const color = this.choosecolorSider.getValue();
         this.store.setSiderColor(color);
     }
     // 修改Header栏背景色
-    private changeHeaderColor() {
-        let color = this.choosecolorHeader.getValue();
+    private updateHeaderColor() {
+        const color = this.choosecolorHeader.getValue();
         this.store.setHeaderColor(color);
     }
     // 设置为暗色菜单风格
@@ -55,7 +56,7 @@ export class Drawer extends BI.Widget {
        3：二级侧边栏
     */
     private headerToggle() {
-        let state = this.switchHeaderRef.isSelected();
+        const state = this.switchHeaderRef.isSelected();
         this.store.setHeaderShow(state);
         if (state) {
             BI.Msg.toast('显示 Header');
@@ -65,7 +66,7 @@ export class Drawer extends BI.Widget {
     }
 
     private mainMenuToggle() {
-        let state = this.switchMainMenuRef.isSelected();
+        const state = this.switchMainMenuRef.isSelected();
         this.store.setMainMenuShow(state);
         if (state) {
             BI.Msg.toast('显示一级侧边栏');
@@ -75,7 +76,7 @@ export class Drawer extends BI.Widget {
     }
 
     private subMenuToggle() {
-        let state = this.switchSubMenuRef.isSelected();
+        const state = this.switchSubMenuRef.isSelected();
         this.store.setSubMenuShow(state);
         if (state) {
             BI.Msg.toast('显示二级侧边栏');
@@ -90,9 +91,9 @@ export class Drawer extends BI.Widget {
         this.store.setHeaderShow(true);
         this.store.setMainMenuShow(true);
         this.store.setSubMenuShow(true);
-        this.switchHeaderRef.setSelected(this.store.getHeaderShow());
-        this.switchMainMenuRef.setSelected(this.store.getMainMenuShow());
-        this.switchSubMenuRef.setSelected(this.store.getSubMenuShow());
+        this.switchHeaderRef.setSelected(this.model.headerShow);
+        this.switchMainMenuRef.setSelected(this.model.mainMenuShow);
+        this.switchSubMenuRef.setSelected(this.model.subMenuShow);
     }
 
     private wholeStyle = (
@@ -138,7 +139,9 @@ export class Drawer extends BI.Widget {
     private top = ['侧边栏主题色设置', 'Header 主题色设置'].map((item, index) => {
         return (
             <BI.VerticalLayout vgap={8}>
-                <BI.Label text={item} textAlign="left" vgap={5}></BI.Label>
+                <BI.Label textAlign="left" vgap={5}>
+                    {item}
+                </BI.Label>
                 <BI.VerticalAdaptLayout>
                     <BI.IconLabel cls={'theme-font'} rgap={20} css={{ 'font-size': '20px' }}></BI.IconLabel>
                     {index === 0 && (
@@ -153,11 +156,11 @@ export class Drawer extends BI.Widget {
                                 {
                                     eventName: 'EVENT_CHANGE',
                                     action: () => {
-                                        this.changeSiderColor();
+                                        this.updateSiderColor();
                                     },
                                 },
                             ]}
-                        ></BI.ColorChooser>
+                        />
                     )}
                     {index === 1 && (
                         <BI.ColorChooser
@@ -171,88 +174,80 @@ export class Drawer extends BI.Widget {
                                 {
                                     eventName: 'EVENT_CHANGE',
                                     action: () => {
-                                        this.changeHeaderColor();
+                                        this.updateHeaderColor();
                                     },
                                 },
                             ]}
-                        ></BI.ColorChooser>
+                        />
                     )}
                 </BI.VerticalAdaptLayout>
             </BI.VerticalLayout>
         );
     });
 
+    private topics1 = (
+        <BI.LeftRightVerticalAdaptLayout vgap={5}>
+            <left>
+                <BI.Text text={'内容区域'} vgap={10} />
+            </left>
+        </BI.LeftRightVerticalAdaptLayout>
+    );
+
+    private topics2 = (
+        <BI.LeftRightVerticalAdaptLayout vgap={5}>
+            <left>
+                <BI.Text text={'Header'} vgap={10} />
+            </left>
+            <right>
+                <BI.Switch
+                    ref={ref => {
+                        this.switchHeaderRef = ref;
+                    }}
+                    handler={() => {
+                        this.headerToggle();
+                    }}
+                ></BI.Switch>
+            </right>
+        </BI.LeftRightVerticalAdaptLayout>
+    );
+
+    private topics3 = (
+        <BI.LeftRightVerticalAdaptLayout vgap={5}>
+            <left>
+                <BI.Text text={'一级侧边栏'} vgap={10} />
+            </left>
+            <right>
+                <BI.Switch
+                    ref={ref => {
+                        this.switchMainMenuRef = ref;
+                    }}
+                    handler={() => {
+                        this.mainMenuToggle();
+                    }}
+                ></BI.Switch>
+            </right>
+        </BI.LeftRightVerticalAdaptLayout>
+    );
+
+    private topics4 = (
+        <BI.LeftRightVerticalAdaptLayout vgap={5}>
+            <left>
+                <BI.Text text={'二级侧边栏'} vgap={10} />
+            </left>
+            <right>
+                <BI.Switch
+                    ref={ref => {
+                        this.switchSubMenuRef = ref;
+                    }}
+                    handler={() => {
+                        this.subMenuToggle();
+                    }}
+                ></BI.Switch>
+            </right>
+        </BI.LeftRightVerticalAdaptLayout>
+    );
     // 中部内容
-    private mid = BI.map(['内容区域', 'Header', '一级侧边栏', '二级侧边栏'], (index, item) => {
-        if (index == 0) {
-            return (
-                <BI.LeftRightVerticalAdaptLayout
-                    vgap={5}
-                    items={{
-                        left: [<BI.Text text={item} vgap={10} />],
-                        right: [],
-                    }}
-                />
-            );
-        } else if (index == 1) {
-            return (
-                <BI.LeftRightVerticalAdaptLayout
-                    vgap={5}
-                    items={{
-                        left: [<BI.Text text={item} vgap={10} />],
-                        right: [
-                            <BI.Switch
-                                ref={ref => {
-                                    this.switchHeaderRef = ref;
-                                }}
-                                handler={() => {
-                                    this.headerToggle();
-                                }}
-                            ></BI.Switch>,
-                        ],
-                    }}
-                />
-            );
-        } else if (index == 2) {
-            return (
-                <BI.LeftRightVerticalAdaptLayout
-                    vgap={5}
-                    items={{
-                        left: [<BI.Text text={item} vgap={10} />],
-                        right: [
-                            <BI.Switch
-                                ref={ref => {
-                                    this.switchMainMenuRef = ref;
-                                }}
-                                handler={() => {
-                                    this.mainMenuToggle();
-                                }}
-                            ></BI.Switch>,
-                        ],
-                    }}
-                />
-            );
-        } else {
-            return (
-                <BI.LeftRightVerticalAdaptLayout
-                    vgap={5}
-                    items={{
-                        left: [<BI.Text text={item} vgap={10} />],
-                        right: [
-                            <BI.Switch
-                                ref={ref => {
-                                    this.switchSubMenuRef = ref;
-                                }}
-                                handler={() => {
-                                    this.subMenuToggle();
-                                }}
-                            ></BI.Switch>,
-                        ],
-                    }}
-                />
-            );
-        }
-    });
+    private mid = [this.topics1, this.topics2, this.topics3, this.topics4];
 
     private str = '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件';
     // 底部内容
@@ -303,8 +298,8 @@ export class Drawer extends BI.Widget {
         // 渲染之前设置header和sider的在选色器中的默认颜色
         this.choosecolorSider.setValue(this.model.siderColor);
         this.choosecolorHeader.setValue(this.model.headerColor);
-        this.switchHeaderRef.setSelected(this.store.getHeaderShow());
-        this.switchMainMenuRef.setSelected(this.store.getMainMenuShow());
-        this.switchSubMenuRef.setSelected(this.store.getSubMenuShow());
+        this.switchHeaderRef.setSelected(this.model.headerShow);
+        this.switchMainMenuRef.setSelected(this.model.mainMenuShow);
+        this.switchSubMenuRef.setSelected(this.model.subMenuShow);
     }
 }

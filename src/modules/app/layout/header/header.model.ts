@@ -15,14 +15,5 @@ export default class LayoutHeaderModel extends Model<{
     public context = <const>['headerColor','fontColor','headerShow'];
 
     public actions = {
-        getHeaderColor:()=>{
-            return this.model.headerColor;
-        },
-        getFontColor:()=>{
-            return this.model.fontColor;
-        },
-        getHeaderShow:()=>{
-            return this.model.headerShow;
-        }
     };
 }

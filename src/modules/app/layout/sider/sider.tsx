@@ -25,26 +25,25 @@ export class LayoutSider extends BI.Widget {
             this.updateSubMenuValueByActiveCardChange(value);
         },
         collapse: () => {
-            let collapsed = this.store.valueOfCollapse();
+            const collapsed = this.model.collapse;
             this.subMenuRef.setWidth(collapsed ? this.subMenuWidth : 50);
         },
         siderColor: () => {
-            let color = this.store.getBackgroundColor();
+            const color = this.model.siderColor;
             this.subMenuRef.element.css('background', `${color}`);
             this.mainMenu.element.css('background', `${color}`);
         },
         fontColor: () => {
-            let color = this.store.getFontColor();
+            const color = this.model.fontColor;
             this.subMenuRef.element.css('color', color);
             this.mainMenu.element.css('color', color);
-            this.mainMenu.setClass(color === '#fff'? 'dark':'light')
         },
         mainMenuShow: () => {
-            let state = this.store.getMainMenuShow();
+            const state = this.model.mainMenuShow;
             this.mainMenu.element.css('display', state ? 'block' : 'none');
         },
         subMenuShow: () => {
-            let state = this.store.getSubMenuShow();
+            const state = this.model.subMenuShow;
             this.subMenuRef.element.css('display', state ? 'block' : 'none');
         },
     };
@@ -91,8 +90,8 @@ export class LayoutSider extends BI.Widget {
 
     // 初始化sider背景色
     private setDefaultColor() {
-        const defaultMainMenuColor = this.store.getBackgroundColor();
-        const defaultFontColor = this.store.getFontColor();
+        const defaultMainMenuColor = this.model.siderColor;
+        const defaultFontColor = this.model.fontColor;
         this.subMenuRef.element.css('background', defaultMainMenuColor);
         this.mainMenu.element.css('background', defaultMainMenuColor);
         this.subMenuRef.element.css('color', defaultFontColor);

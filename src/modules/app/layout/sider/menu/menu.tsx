@@ -39,12 +39,7 @@ export class Menu extends BI.Widget {
     };
 
     private menuRef: CustomTree;
-    private menuItemRef:MenuItem;
 
-    public setClass(style:string){
-        this.menuItemRef.changeClass(style);
-        console.log(this.menuRef.element)
-    }
     /**
      * 创建菜单选项组件
      * @param itemInfos 菜单选项信息
@@ -58,9 +53,9 @@ export class Menu extends BI.Widget {
             const valueOrValues = cards ? BI.map(cards, (_index, card) => card.value).join(',') : value;
 
             return children ? (
-                <MenuNode  value={valueOrValues} text={text} icon={icon} level={level} children={this.createMenuItems(children, itemStyle, level + 1)} />
+                <MenuNode value={valueOrValues} text={text} icon={icon} level={level} children={this.createMenuItems(children, itemStyle, level + 1)} />
             ) : (
-                <MenuItem ref={ref=>{this.menuItemRef = ref}}   value={valueOrValues} text={text} icon={icon} level={level} style={itemStyle} />
+                <MenuItem value={valueOrValues} text={text} icon={icon} level={level} style={itemStyle} />
             );
         });
     }

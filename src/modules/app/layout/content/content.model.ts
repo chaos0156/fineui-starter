@@ -42,7 +42,7 @@ export default class LayoutContentModel extends Model<{
         /**
          *  切换collapse
         */
-       handleCollapse:()=>{
+       handleToggleCollapse:()=>{
             this.model.collapse = !this.model.collapse;
        }
     };

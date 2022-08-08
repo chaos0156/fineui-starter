@@ -43,7 +43,7 @@ export class Mark extends BI.Widget {
     ];
 
     public render() {
-        let markGroup = this.content.map(item => {
+        const markGroup = this.content.map(item => {
             return {
                 type: 'bi.vertical',
                 cls: 'mark',

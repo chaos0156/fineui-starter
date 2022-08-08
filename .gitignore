@@ -51,3 +51,4 @@ crashlytics-build.properties
 /dist
 package-lock.json
 yarn.lock
+.vscode
