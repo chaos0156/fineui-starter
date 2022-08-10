@@ -25,8 +25,7 @@ export class LayoutSider extends BI.Widget {
             this.updateSubMenuValueByActiveCardChange(value);
         },
         collapse: () => {
-            const collapsed = this.model.collapse;
-            this.subMenuRef.setWidth(collapsed ? this.subMenuWidth : 50);
+            this.subMenuRef.setWidth(this.model.collapse ? 214 : 48);
         },
         siderColor: () => {
             const color = this.model.siderColor;
@@ -46,6 +45,9 @@ export class LayoutSider extends BI.Widget {
             const state = this.model.subMenuShow;
             this.subMenuRef.element.css('display', state ? 'block' : 'none');
         },
+        isExpend: () => {
+            this.subMenuRef.setWidth(214)
+        },
     };
 
     private model: LayoutSiderModel['model'];
@@ -54,7 +56,6 @@ export class LayoutSider extends BI.Widget {
     private mainMenu: Menu;
     // 二级菜单
     private subMenuRef: Menu;
-    private subMenuWidth: number;
 
     /**
      * 更新二级菜单的itemInfos
@@ -99,8 +100,7 @@ export class LayoutSider extends BI.Widget {
     }
 
     public render() {
-        const { MAIN_MENU_WIDTH, SUB_MENU_WIDTH } = LayoutConstant;
-        this.subMenuWidth = SUB_MENU_WIDTH;
+        const { MAIN_MENU_WIDTH } = LayoutConstant;
         const mainMenuItemInfos = BI.map(ROUTE_INFOS, (_index, routeInfo) => {
             const { value, text, icon } = routeInfo;
 

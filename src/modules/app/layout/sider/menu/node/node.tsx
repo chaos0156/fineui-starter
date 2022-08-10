@@ -1,8 +1,9 @@
 import { NodeButton, IconChangeButton } from '@fui/core';
-import { shortcut,store } from '@core/decorator';
+import { shortcut, store } from '@core/decorator';
 import { MenuItem } from '../item/item';
 import './node.less';
 import LayoutNodeModel from './node.model';
+import { Text } from '@fui/core';
 
 // 节点展开和折叠状态分别对应的类名
 export const ARROW_CLASSES_MAP = {
@@ -30,10 +31,14 @@ export class MenuNode extends BI.NodeButton {
     };
 
     private arrowRef: IconChangeButton;
+    private textRef: Text;
+    private model: LayoutNodeModel['model'];
+    private store: LayoutNodeModel['store'];
 
     public watch = {
         collapse: () => {
-            this.triggerCollapse()
+            if (!this.model.isExpend) this.triggerCollapse();
+            this.textRef.element.css('display', this.model.collapse ? 'block' : 'none');
         },
     };
 
@@ -45,28 +50,36 @@ export class MenuNode extends BI.NodeButton {
         Object.getPrototypeOf(MenuNode).prototype.setOpened.call(this, opened);
         const arrowCls = ARROW_CLASSES_MAP[opened ? 'expand' : 'collapse'];
         this.arrowRef.setIcon(arrowCls);
+        if (opened && !this.model.collapse) {
+
+            this.store.setExpend();
+        }
     }
 
     public render() {
         const { text, icon, level } = this.options;
 
         return (
-            <BI.LeftRightVerticalAdaptLayout
-                lhgap={8}
-                rhgap={16}
-                items={{
-                    left: [<BI.IconLabel cls={`icon ${icon}`} lgap={8 + 24 * level} />, <BI.Text cls="text" text={text} />],
-                    right: [
-                        <BI.IconChangeButton
-                            ref={ref => {
-                                this.arrowRef = ref;
-                            }}
-                            iconCls="arrow"
-                        />,
-                    ],
-                }}
-            />
+            <BI.LeftRightVerticalAdaptLayout lhgap={8} rhgap={16}>
+                <left>
+                    <BI.IconLabel cls={`icon ${icon}`} lgap={8 + 24 * level} title={text} />
+                    <BI.Text cls="text" text={text} ref={ref => (this.textRef = ref)} />
+                </left>
+                <right>
+                    <BI.IconChangeButton
+                        ref={ref => {
+                            this.arrowRef = ref;
+                        }}
+                        iconCls="arrow"
+                    />
+                    ,
+                </right>
+            </BI.LeftRightVerticalAdaptLayout>
         );
+    }
+
+    public beforeMount() {
+        this.textRef.element.css('display', this.model.collapse ? 'block' : 'none');
     }
 }
 

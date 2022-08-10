@@ -11,12 +11,13 @@ export default class LayoutSiderModel extends Model<{
         fontColor:LayoutModel['TYPE']['fontColor'];
         mainMenuShow:LayoutModel['TYPE']['mainMenuShow'];
         subMenuShow:LayoutModel['TYPE']['subMenuShow'];
+        isExpend: LayoutModel['TYPE']['isExpend'];
     };
     context: LayoutSiderModel['context'];
 }> {
     static xtype = 'app.model.layout_sider';
 
-    public context = <const>['openedCards', 'activeCard','collapse','siderColor','fontColor','mainMenuShow','subMenuShow'];
+    public context = <const>['openedCards', 'activeCard','collapse','siderColor','fontColor','mainMenuShow','subMenuShow','isExpend'];
 
     public actions = {
         /**

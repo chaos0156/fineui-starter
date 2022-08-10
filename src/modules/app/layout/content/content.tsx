@@ -1,4 +1,4 @@
-import { Tab,IconChangeButton } from '@fui/core';
+import { Tab, IconChangeButton } from '@fui/core';
 import { shortcut, store } from '@core/decorator';
 import { Nav, NavItemInfo, NavItemStyle } from './nav/nav';
 import { RouteType, RouteInfo, ROUTE_INFOS } from '@/routes';
@@ -47,7 +47,6 @@ export class LayoutContent extends BI.Widget {
     private navRef: Nav;
     private tabRef: Tab;
     private iconRef: IconChangeButton;
-    private flag: boolean;
     private contentsMap: ContentsMap;
 
     /**
@@ -111,13 +110,12 @@ export class LayoutContent extends BI.Widget {
     Hamburger处理函数*/
     private toggle() {
         this.store.handleToggleCollapse();
-        this.flag = !this.flag;
-        this.iconRef.setIcon(this.flag ? 'left-font' : 'right-font');
+        this.iconRef.setIcon(this.model.collapse ? 'right-font' : 'left-font');
     }
 
     // 打开首页
     public setHome() {
-        this.store.changeCard('directory')
+        this.store.changeCard('directory');
     }
 
     // 生命周期函数
@@ -132,7 +130,6 @@ export class LayoutContent extends BI.Widget {
         const navItemInfo = this.contentsMap[navValue];
         const navItemType = navItemInfo.type as RouteType;
         const navItemStyle = ROUTE_TYPE_NAV_ITEM_STYLE_MAP[navItemType];
-
 
         return (
             <BI.VTapeLayout>

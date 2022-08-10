@@ -29,6 +29,7 @@ export class Menu extends BI.Widget {
 
     static EVENT = {
         CHANGE: 'EVENT_CHANGE',
+        EXPEND: '',
     };
 
     public props: MenuProps = {
@@ -114,12 +115,6 @@ export class Menu extends BI.Widget {
                 ]}
             />
         );
-    }
-    /**
-     * mounted
-     */
-    public mounted() {
-        console.log(this.menuRef.element.get()[0].offsetWidth);
     }
 }
 
