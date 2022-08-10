@@ -7,17 +7,17 @@ export default class LayoutSiderModel extends Model<{
         collapse: LayoutModel['TYPE']['collapse'];
         openedCards: LayoutModel['TYPE']['openedCards'];
         activeCard: LayoutModel['TYPE']['activeCard'];
-        siderColor:LayoutModel['TYPE']['siderColor'];
-        fontColor:LayoutModel['TYPE']['fontColor'];
-        mainMenuShow:LayoutModel['TYPE']['mainMenuShow'];
-        subMenuShow:LayoutModel['TYPE']['subMenuShow'];
+        siderColor: LayoutModel['TYPE']['siderColor'];
+        fontColor: LayoutModel['TYPE']['fontColor'];
+        mainMenuShow: LayoutModel['TYPE']['mainMenuShow'];
+        subMenuShow: LayoutModel['TYPE']['subMenuShow'];
         isExpend: LayoutModel['TYPE']['isExpend'];
     };
     context: LayoutSiderModel['context'];
 }> {
     static xtype = 'app.model.layout_sider';
 
-    public context = <const>['openedCards', 'activeCard','collapse','siderColor','fontColor','mainMenuShow','subMenuShow','isExpend'];
+    public context = <const>['openedCards', 'activeCard', 'collapse', 'siderColor', 'fontColor', 'mainMenuShow', 'subMenuShow', 'isExpend'];
 
     public actions = {
         /**
@@ -44,6 +44,9 @@ export default class LayoutSiderModel extends Model<{
         closeAllCards: () => {
             this.model.openedCards = [];
             this.model.activeCard = '';
+        },
+        setExpend: () => {
+            this.model.isExpend = false;
         },
     };
 }

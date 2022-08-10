@@ -51,7 +51,6 @@ export class MenuNode extends BI.NodeButton {
         const arrowCls = ARROW_CLASSES_MAP[opened ? 'expand' : 'collapse'];
         this.arrowRef.setIcon(arrowCls);
         if (opened && !this.model.collapse) {
-
             this.store.setExpend();
         }
     }

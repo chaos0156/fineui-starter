@@ -46,7 +46,10 @@ export class LayoutSider extends BI.Widget {
             this.subMenuRef.element.css('display', state ? 'block' : 'none');
         },
         isExpend: () => {
-            this.subMenuRef.setWidth(214)
+            if (this.model.isExpend) {
+                this.subMenuRef.setWidth(214);
+                this.store.setExpend();
+            }
         },
     };
 
