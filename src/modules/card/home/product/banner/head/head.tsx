@@ -12,18 +12,18 @@ export class Head extends BI.Widget {
         place: 0,
     };
 
-    private img = [
+    private imgUrl = [
         'https://www.fanruan.com/images/index-logo_1-5.png',
         'https://www.fanruan.com/images/index-logo_3-5.png',
         'https://www.fanruan.com/images/index-logo_jdy.png',
     ];
     public render() {
         const { text1, text2, place } = this.options;
-        let Img;
+        let img;
         if (place == 2) {
-            Img = <BI.Img src={this.img[place]} width={135} height={135} cls={'imgr'} lgap={50}></BI.Img>;
+            img = <BI.Img src={this.imgUrl[place]} width={135} height={135} cls={'imgr'} lgap={40}></BI.Img>;
         } else {
-            Img = <BI.Img src={this.img[place]} width={340} height={170} cls={'img'} lgap={60}></BI.Img>;
+            img = <BI.Img src={this.imgUrl[place]} width={340} height={170} cls={'img'} lgap={50}></BI.Img>;
         }
         return (
             <BI.HorizontalLayout height={135} cls={'head'} scrollable={false}>
@@ -31,7 +31,7 @@ export class Head extends BI.Widget {
                     <BI.Label text={text1} cls={'text1'} textAlign={'left'} />
                     <BI.Label text={text2} cls={'text2'} textAlign={'left'}></BI.Label>
                 </BI.VerticalLayout>
-                {Img}
+                {img}
             </BI.HorizontalLayout>
         );
     }

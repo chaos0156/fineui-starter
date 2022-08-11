@@ -22,27 +22,29 @@ export class HeaderPopup extends BI.Widget {
     private showPopover() {
         BI.Popovers.removeAll();
         var id = '弹出层id' + BI.UUID();
-        BI.Popovers.create(id, {
-            type: 'bi.bar_popover',
-            header: '弹出层',
-            size: 'small',
-            body: <BI.Label css= {{ 'font-size': '20px' }}>{'是否打开项目地址？'}</BI.Label>,
-            listeners: [
-                {
-                    eventName: 'EVENT_CANCEL',
-                    action: () => {
-                        BI.Msg.toast('点击了取消');
+        BI.Popovers.create(
+            id,
+            <BI.BarPopover
+                header="弹出层"
+                size="small"
+                body={<BI.Label css={{ 'font-size': '20px' }}>{'是否打开项目地址？'}</BI.Label>}
+                listeners={[
+                    {
+                        eventName: 'EVENT_CANCEL',
+                        action: () => {
+                            BI.Msg.toast('点击了取消');
+                        },
                     },
-                },
-                {
-                    eventName: 'EVENT_CONFIRM',
-                    action: () => {
-                        BI.Msg.toast('点击了确定');
-                        location.href = this.githubUrl;
+                    {
+                        eventName: 'EVENT_CONFIRM',
+                        action: () => {
+                            BI.Msg.toast('点击了确定');
+                            location.href = this.githubUrl;
+                        },
                     },
-                },
-            ],
-        }).show(id);
+                ]}
+            ></BI.BarPopover>
+        ).show(id);
     }
 
     private arr = [
@@ -53,7 +55,7 @@ export class HeaderPopup extends BI.Widget {
                 {
                     eventName: 'EVENT_CHANGE',
                     action: () => {
-                        this.fireEvent(HeaderPopup.EVENT.CHANGE)
+                        this.fireEvent(HeaderPopup.EVENT.CHANGE);
                     },
                 },
             ],
